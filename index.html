@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Pendaftaran Pelajar Baru | Maahad Tahfiz al-Quran lil Muttaqin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,6 +33,7 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -41,6 +42,7 @@
             color: var(--fg);
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         .font-serif {
@@ -76,29 +78,48 @@
             animation: float 20s ease-in-out infinite;
         }
         .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
-            top: -200px;
-            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.12) 0%, transparent 70%);
+            top: -100px;
+            right: -80px;
             animation-delay: 0s;
         }
         .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(26, 77, 58, 0.2) 0%, transparent 70%);
-            bottom: -150px;
-            left: -100px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(26, 77, 58, 0.15) 0%, transparent 70%);
+            bottom: -80px;
+            left: -60px;
             animation-delay: -7s;
         }
         .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(201, 162, 39, 0.1) 0%, transparent 70%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             animation-delay: -14s;
+        }
+
+        @media (min-width: 768px) {
+            .orb-1 {
+                width: 500px;
+                height: 500px;
+                top: -200px;
+                right: -100px;
+            }
+            .orb-2 {
+                width: 400px;
+                height: 400px;
+                bottom: -150px;
+                left: -100px;
+            }
+            .orb-3 {
+                width: 300px;
+                height: 300px;
+            }
         }
 
         @keyframes float {
@@ -107,13 +128,13 @@
                 transform: translate(0, 0) scale(1);
             }
             25% {
-                transform: translate(30px, -30px) scale(1.05);
+                transform: translate(20px, -20px) scale(1.05);
             }
             50% {
-                transform: translate(-20px, 20px) scale(0.95);
+                transform: translate(-15px, 15px) scale(0.95);
             }
             75% {
-                transform: translate(20px, 30px) scale(1.02);
+                transform: translate(15px, 20px) scale(1.02);
             }
         }
 
@@ -122,9 +143,9 @@
            ============================================================ */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .reveal.visible {
             opacity: 1;
@@ -157,7 +178,7 @@
         }
 
         /* ============================================================
-           NAVBAR
+           NAVBAR - Mobile First
            ============================================================ */
         .navbar {
             position: fixed;
@@ -166,11 +187,81 @@
             right: 0;
             z-index: 50;
             transition: all 0.3s ease;
+            height: 64px;
         }
         .navbar.scrolled {
             background: rgba(10, 15, 13, 0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
+        }
+
+        .navbar .logo-text {
+            font-size: 14px;
+        }
+        .navbar .logo-sub {
+            font-size: 10px;
+        }
+
+        @media (min-width: 640px) {
+            .navbar {
+                height: 72px;
+            }
+            .navbar .logo-text {
+                font-size: 18px;
+            }
+            .navbar .logo-sub {
+                font-size: 12px;
+            }
+        }
+
+        /* Mobile bottom nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 45;
+            background: rgba(10, 15, 13, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 6px 0 env(safe-area-inset-bottom, 6px) 0;
+            height: 60px;
+        }
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 10px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 8px;
+            min-width: 48px;
+        }
+        .bottom-nav a.active {
+            color: var(--accent);
+        }
+        .bottom-nav a svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+        }
+        .bottom-nav a .nav-label {
+            font-size: 9px;
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none;
+            }
         }
 
         /* ============================================================
@@ -194,27 +285,33 @@
             background: linear-gradient(135deg, var(--accent) 0%, #b8912a 100%);
             color: var(--bg);
             font-weight: 700;
-            padding: 16px 40px;
+            padding: 14px 28px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px;
+            font-size: 15px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 12px 36px rgba(201, 162, 39, 0.35);
+            width: 100%;
+            touch-action: manipulation;
         }
         .btn-primary:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
+        }
+
+        @media (min-width: 480px) {
+            .btn-primary {
+                width: auto;
+                padding: 16px 40px;
+                font-size: 16px;
+            }
         }
 
         .btn-secondary {
-            padding: 16px 32px;
+            padding: 14px 24px;
             border: 2px solid rgba(26, 77, 58, 0.5);
             border-radius: 10px;
             color: var(--fg);
@@ -222,40 +319,57 @@
             cursor: pointer;
             transition: all 0.3s ease;
             background: transparent;
-            font-size: 16px;
+            font-size: 15px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            width: 100%;
+            touch-action: manipulation;
         }
-        .btn-secondary:hover {
+        .btn-secondary:active {
             background: rgba(26, 77, 58, 0.2);
-            border-color: var(--accent);
-            transform: translateY(-2px);
+        }
+
+        @media (min-width: 480px) {
+            .btn-secondary {
+                width: auto;
+                padding: 16px 32px;
+                font-size: 16px;
+            }
         }
 
         .btn-cta {
             background: var(--bg);
             color: var(--fg);
             font-weight: 700;
-            padding: 18px 44px;
+            padding: 16px 32px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 18px;
+            font-size: 16px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            width: 100%;
+            touch-action: manipulation;
         }
-        .btn-cta:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+        .btn-cta:active {
+            transform: scale(0.97);
+        }
+
+        @media (min-width: 480px) {
+            .btn-cta {
+                width: auto;
+                padding: 18px 44px;
+                font-size: 18px;
+            }
         }
 
         .btn-cta-outline {
-            padding: 18px 36px;
+            padding: 16px 28px;
             border: 2px solid var(--bg);
             border-radius: 10px;
             color: var(--bg);
@@ -263,30 +377,42 @@
             cursor: pointer;
             transition: all 0.3s ease;
             background: transparent;
-            font-size: 18px;
+            font-size: 16px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            width: 100%;
+            touch-action: manipulation;
         }
-        .btn-cta-outline:hover {
+        .btn-cta-outline:active {
             background: rgba(10, 15, 13, 0.1);
-            transform: translateY(-2px);
+        }
+
+        @media (min-width: 480px) {
+            .btn-cta-outline {
+                width: auto;
+                padding: 18px 36px;
+                font-size: 18px;
+            }
         }
 
         .btn-close-modal {
             position: absolute;
-            top: 16px;
-            right: 20px;
+            top: 12px;
+            right: 16px;
             background: none;
             border: none;
             color: var(--muted);
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             transition: color 0.3s ease;
             line-height: 1;
+            padding: 8px;
+            touch-action: manipulation;
         }
-        .btn-close-modal:hover {
+        .btn-close-modal:hover,
+        .btn-close-modal:active {
             color: var(--fg);
         }
 
@@ -295,7 +421,8 @@
            ============================================================ */
         .glass-card {
             background: rgba(21, 31, 26, 0.8);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
             border-radius: 16px;
         }
@@ -304,108 +431,164 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 32px;
+            padding: 24px 20px;
             transition: all 0.3s ease;
         }
-        .feature-card:hover {
-            border-color: rgba(201, 162, 39, 0.5);
-            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.08);
-            transform: translateY(-4px);
+        .feature-card:active {
+            transform: scale(0.98);
+        }
+
+        @media (min-width: 768px) {
+            .feature-card {
+                padding: 32px;
+            }
+            .feature-card:hover {
+                border-color: rgba(201, 162, 39, 0.5);
+                box-shadow: 0 20px 40px rgba(201, 162, 39, 0.08);
+                transform: translateY(-4px);
+            }
         }
 
         .product-card {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px 16px;
             transition: all 0.3s ease;
             text-decoration: none;
             display: block;
             color: inherit;
+            touch-action: manipulation;
         }
-        .product-card:hover {
-            border-color: rgba(201, 162, 39, 0.5);
-            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.08);
-            transform: translateY(-4px);
+        .product-card:active {
+            transform: scale(0.97);
+        }
+
+        @media (min-width: 768px) {
+            .product-card {
+                padding: 24px;
+            }
+            .product-card:hover {
+                border-color: rgba(201, 162, 39, 0.5);
+                box-shadow: 0 20px 40px rgba(201, 162, 39, 0.08);
+                transform: translateY(-4px);
+            }
         }
 
         /* ============================================================
-           TIMELINE
+           TIMELINE - Mobile friendly
            ============================================================ */
         .timeline-item {
             position: relative;
-            padding-left: 32px;
+            padding-left: 28px;
         }
         .timeline-item::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 14px;
-            height: 14px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: var(--accent);
-            box-shadow: 0 0 24px rgba(201, 162, 39, 0.5);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
         }
         .timeline-item::after {
             content: '';
             position: absolute;
-            left: 6px;
-            top: 28px;
+            left: 5px;
+            top: 24px;
             width: 2px;
-            height: calc(100% - 20px);
+            height: calc(100% - 18px);
             background: linear-gradient(to bottom, var(--accent), transparent);
         }
         .timeline-item:last-child::after {
             display: none;
         }
 
+        .timeline-item .date {
+            font-size: 16px;
+        }
+        .timeline-item .event {
+            font-size: 14px;
+        }
+
+        @media (min-width: 640px) {
+            .timeline-item {
+                padding-left: 32px;
+            }
+            .timeline-item::before {
+                width: 14px;
+                height: 14px;
+                top: 10px;
+            }
+            .timeline-item::after {
+                left: 6px;
+                top: 28px;
+                height: calc(100% - 20px);
+            }
+            .timeline-item .date {
+                font-size: 18px;
+            }
+            .timeline-item .event {
+                font-size: 16px;
+            }
+        }
+
         /* ============================================================
-           CORNER ORNAMENTS
+           CORNER ORNAMENTS - Hide on mobile
            ============================================================ */
         .corner {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 2px solid var(--accent);
-            opacity: 0.25;
-            pointer-events: none;
+            display: none;
         }
-        .corner-tl {
-            top: 0;
-            left: 0;
-            border-right: none;
-            border-bottom: none;
-        }
-        .corner-tr {
-            top: 0;
-            right: 0;
-            border-left: none;
-            border-bottom: none;
-        }
-        .corner-bl {
-            bottom: 0;
-            left: 0;
-            border-right: none;
-            border-top: none;
-        }
-        .corner-br {
-            bottom: 0;
-            right: 0;
-            border-left: none;
-            border-top: none;
+
+        @media (min-width: 768px) {
+            .corner {
+                display: block;
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                border: 2px solid var(--accent);
+                opacity: 0.25;
+                pointer-events: none;
+            }
+            .corner-tl {
+                top: 0;
+                left: 0;
+                border-right: none;
+                border-bottom: none;
+            }
+            .corner-tr {
+                top: 0;
+                right: 0;
+                border-left: none;
+                border-bottom: none;
+            }
+            .corner-bl {
+                bottom: 0;
+                left: 0;
+                border-right: none;
+                border-top: none;
+            }
+            .corner-br {
+                bottom: 0;
+                right: 0;
+                border-left: none;
+                border-top: none;
+            }
         }
 
         /* ============================================================
            COUNTER
            ============================================================ */
         .counter-number {
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 800;
             color: var(--accent);
             line-height: 1.1;
             font-family: 'Inter', sans-serif;
         }
+
         @media (min-width: 768px) {
             .counter-number {
                 font-size: 56px;
@@ -417,84 +600,96 @@
            ============================================================ */
         .whatsapp-float {
             position: fixed;
-            bottom: 28px;
-            right: 28px;
+            bottom: 76px;
+            right: 16px;
             z-index: 999;
             text-decoration: none;
         }
+
+        @media (min-width: 768px) {
+            .whatsapp-float {
+                bottom: 28px;
+                right: 28px;
+            }
+        }
+
         .whatsapp-btn {
             display: flex;
             align-items: center;
             background: #25D366;
             border-radius: 50px;
-            box-shadow: 0 4px 24px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             overflow: hidden;
-            width: 60px;
-            height: 60px;
+            width: 52px;
+            height: 52px;
             justify-content: center;
             position: relative;
         }
-        .whatsapp-btn:hover {
-            width: 200px;
-            background: #128C7E;
-            justify-content: flex-start;
-            padding-left: 18px;
-            box-shadow: 0 6px 32px rgba(37, 211, 102, 0.5);
+
+        @media (min-width: 768px) {
+            .whatsapp-btn {
+                width: 60px;
+                height: 60px;
+            }
+            .whatsapp-btn:hover {
+                width: 200px;
+                background: #128C7E;
+                justify-content: flex-start;
+                padding-left: 18px;
+                box-shadow: 0 6px 32px rgba(37, 211, 102, 0.5);
+            }
+            .whatsapp-btn:hover .whatsapp-text {
+                opacity: 1;
+            }
         }
+
         .whatsapp-btn svg {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             flex-shrink: 0;
             fill: #fff;
         }
-        .whatsapp-text {
-            white-space: nowrap;
-            margin-left: 14px;
-            font-weight: 700;
-            font-size: 14px;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.2s ease 0.1s;
-            font-family: 'Inter', sans-serif;
-        }
-        .whatsapp-btn:hover .whatsapp-text {
-            opacity: 1;
-        }
-        .whatsapp-btn::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50px;
-            background: #25D366;
-            z-index: -1;
-            animation: pulse-wa 2s infinite;
-        }
-        @keyframes pulse-wa {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
+
+        @media (min-width: 768px) {
+            .whatsapp-btn svg {
+                width: 32px;
+                height: 32px;
             }
-            100% {
-                transform: scale(1.5);
+        }
+
+        .whatsapp-text {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .whatsapp-text {
+                display: inline;
+                white-space: nowrap;
+                margin-left: 14px;
+                font-weight: 700;
+                font-size: 14px;
+                color: #fff;
                 opacity: 0;
+                transition: opacity 0.2s ease 0.1s;
+                font-family: 'Inter', sans-serif;
             }
         }
 
         /* ============================================================
-           MODAL / OVERLAY FORM
+           MODAL / OVERLAY FORM - Mobile first
            ============================================================ */
         .form-overlay {
             position: fixed;
             inset: 0;
             background: rgba(10, 15, 13, 0.92);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 200;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 12px;
             animation: overlayFadeIn 0.3s ease;
         }
         .form-overlay.active {
@@ -504,7 +699,7 @@
         @keyframes overlayFadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.98);
+                transform: scale(0.97);
             }
             to {
                 opacity: 1;
@@ -515,18 +710,26 @@
         .form-modal {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px 28px;
+            border-radius: 16px;
+            padding: 24px 16px;
             max-width: 820px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 92vh;
             overflow-y: auto;
             position: relative;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
         }
 
+        @media (min-width: 640px) {
+            .form-modal {
+                padding: 32px 28px;
+                border-radius: 20px;
+                max-height: 90vh;
+            }
+        }
+
         .form-modal::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
         .form-modal::-webkit-scrollbar-track {
             background: var(--bg);
@@ -536,71 +739,112 @@
             background: var(--border);
             border-radius: 10px;
         }
-        .form-modal::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
+
+        .form-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        @media (min-width: 640px) {
+            .form-section-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
         }
 
         /* ============================================================
-           FORM STYLES
+           FORM STYLES - Mobile first
            ============================================================ */
         .form-input {
             background: var(--bg);
             border: 1px solid var(--border);
             color: var(--fg);
-            padding: 14px 18px;
+            padding: 12px 14px;
             border-radius: 10px;
             width: 100%;
             transition: all 0.3s ease;
-            font-size: 15px;
+            font-size: 14px;
             font-family: 'Inter', sans-serif;
+            -webkit-appearance: none;
         }
+
+        @media (min-width: 640px) {
+            .form-input {
+                padding: 14px 18px;
+                font-size: 15px;
+            }
+        }
+
         .form-input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.12);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
         }
         .form-input::placeholder {
             color: var(--muted);
         }
         .form-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: var(--fg);
-            font-size: 14px;
+            font-size: 13px;
         }
+
+        @media (min-width: 640px) {
+            .form-label {
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+        }
+
         .form-label span {
             color: var(--accent);
         }
+
         select.form-input {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b9a8f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 12px center;
             background-size: 18px;
-            padding-right: 44px;
+            padding-right: 40px;
             cursor: pointer;
         }
+
         .custom-checkbox {
             display: flex;
             align-items: flex-start;
-            gap: 14px;
+            gap: 12px;
             cursor: pointer;
-            padding: 16px 20px;
+            padding: 14px 16px;
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 10px;
             transition: all 0.3s ease;
         }
-        .custom-checkbox:hover {
+
+        @media (min-width: 640px) {
+            .custom-checkbox {
+                padding: 16px 20px;
+                gap: 14px;
+            }
+        }
+
+        .custom-checkbox:active {
             border-color: var(--accent);
         }
         .custom-checkbox input {
             display: none;
         }
         .custom-checkbox .check-mark {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--border);
             border-radius: 6px;
             flex-shrink: 0;
@@ -618,45 +862,68 @@
             content: '✓';
             color: var(--bg);
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
         }
         .custom-checkbox .check-label {
             color: var(--muted);
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
         }
 
-        /* Success Message inside modal */
+        @media (min-width: 640px) {
+            .custom-checkbox .check-label {
+                font-size: 14px;
+            }
+        }
+
+        /* Success Message */
         .success-message {
             display: none;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 16px;
         }
         .success-message.show {
             display: block;
             animation: fadeIn 0.5s ease;
         }
+
+        @media (min-width: 640px) {
+            .success-message {
+                padding: 40px 20px;
+            }
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(16px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .success-icon {
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 16px;
             animation: scaleIn 0.5s ease;
         }
+
+        @media (min-width: 640px) {
+            .success-icon {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 24px;
+            }
+        }
+
         @keyframes scaleIn {
             from {
                 transform: scale(0);
@@ -667,143 +934,265 @@
         }
 
         /* ============================================================
-           GALLERY
+           GALLERY - Mobile first
            ============================================================ */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        @media (min-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             aspect-ratio: 4/3;
             background: var(--card);
             border: 1px solid var(--border);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
+            touch-action: manipulation;
         }
-        .gallery-item:hover {
-            transform: scale(1.03);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.15);
-            z-index: 5;
+
+        .gallery-item:active {
+            transform: scale(0.97);
         }
+
+        @media (min-width: 768px) {
+            .gallery-item {
+                border-radius: 16px;
+            }
+            .gallery-item:hover {
+                transform: scale(1.03);
+                border-color: var(--accent);
+                box-shadow: 0 20px 40px rgba(201, 162, 39, 0.15);
+                z-index: 5;
+            }
+            .gallery-item:hover img {
+                transform: scale(1.08);
+            }
+            .gallery-item:hover .overlay {
+                opacity: 1;
+            }
+        }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
         }
-        .gallery-item:hover img {
-            transform: scale(1.08);
-        }
+
         .gallery-item .overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 20px 16px 16px;
-            background: linear-gradient(to top, rgba(10, 15, 13, 0.9), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .gallery-item:hover .overlay {
+            padding: 12px 10px 10px;
+            background: linear-gradient(to top, rgba(10, 15, 13, 0.85), transparent);
             opacity: 1;
         }
+
         .gallery-item .overlay p {
-            font-size: 14px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--fg);
+            line-height: 1.2;
         }
         .gallery-item .overlay span {
-            font-size: 12px;
-            color: var(--muted);
+            display: none;
         }
 
-        /* Lightbox */
+        @media (min-width: 640px) {
+            .gallery-item .overlay {
+                padding: 16px 14px 14px;
+                opacity: 0;
+            }
+            .gallery-item .overlay p {
+                font-size: 14px;
+            }
+            .gallery-item .overlay span {
+                display: inline;
+                font-size: 12px;
+                color: var(--muted);
+            }
+        }
+
+        /* Lightbox - Mobile first */
         .lightbox {
             position: fixed;
             inset: 0;
             background: rgba(10, 15, 13, 0.95);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 300;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 16px;
             animation: overlayFadeIn 0.3s ease;
         }
         .lightbox.active {
             display: flex;
         }
         .lightbox img {
-            max-width: 90vw;
-            max-height: 80vh;
-            border-radius: 16px;
+            max-width: 95vw;
+            max-height: 70vh;
+            border-radius: 12px;
             border: 1px solid var(--border);
             object-fit: contain;
         }
         .lightbox .close-lightbox {
             position: absolute;
-            top: 24px;
-            right: 32px;
+            top: 16px;
+            right: 20px;
             background: none;
             border: none;
             color: var(--fg);
-            font-size: 36px;
+            font-size: 28px;
             cursor: pointer;
             transition: color 0.3s ease;
+            padding: 8px;
+            touch-action: manipulation;
         }
-        .lightbox .close-lightbox:hover {
+        .lightbox .close-lightbox:active {
             color: var(--accent);
         }
         .lightbox .caption {
             position: absolute;
-            bottom: 40px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             color: var(--fg);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             text-align: center;
-            max-width: 80%;
+            max-width: 90%;
+        }
+
+        @media (min-width: 768px) {
+            .lightbox img {
+                max-width: 90vw;
+                max-height: 80vh;
+                border-radius: 16px;
+            }
+            .lightbox .close-lightbox {
+                top: 24px;
+                right: 32px;
+                font-size: 36px;
+            }
+            .lightbox .close-lightbox:hover {
+                color: var(--accent);
+            }
+            .lightbox .caption {
+                bottom: 40px;
+                font-size: 16px;
+            }
         }
 
         /* ============================================================
-           RESPONSIVE
+           BADGE & INFO GRID - Mobile friendly
            ============================================================ */
-        @media (max-width: 640px) {
-            .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-            }
-            .whatsapp-btn {
-                width: 56px;
-                height: 56px;
-            }
-            .whatsapp-btn:hover {
-                width: 180px;
-            }
-            .counter-number {
-                font-size: 36px;
-            }
-            .form-modal {
-                padding: 20px 16px;
-                max-height: 95vh;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
-            }
-            .lightbox img {
-                max-width: 95vw;
-                max-height: 70vh;
+        .badge-reg {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: 10px;
+            font-weight: 600;
+            background: rgba(201, 162, 39, 0.12);
+            border: 1px solid rgba(201, 162, 39, 0.25);
+            color: var(--accent);
+            margin-right: 4px;
+            margin-bottom: 4px;
+        }
+
+        @media (min-width: 640px) {
+            .badge-reg {
+                padding: 4px 14px;
+                font-size: 12px;
+                margin-right: 8px;
+                margin-bottom: 6px;
             }
         }
 
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+        }
+        .info-grid .label {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .info-grid .value {
+            color: var(--fg);
+            font-size: 12px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        @media (min-width: 640px) {
+            .info-grid {
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            .info-grid .label {
+                font-size: 13px;
+            }
+            .info-grid .value {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+            .info-grid .value {
+                text-align: left;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE UTILITIES
+           ============================================================ */
+        .section-padding {
+            padding: 48px 16px;
+        }
+
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 64px 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .section-padding {
+                padding: 80px 32px;
+            }
+        }
+
+        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
             .reveal {
                 opacity: 1;
@@ -822,66 +1211,60 @@
             .form-overlay {
                 animation: none;
             }
-            .gallery-item:hover {
+            .gallery-item:active {
                 transform: none;
             }
-            .gallery-item:hover img {
+            .gallery-item img {
+                transition: none;
+            }
+            .btn-primary:active,
+            .btn-cta:active,
+            .btn-secondary:active,
+            .product-card:active,
+            .feature-card:active {
                 transform: none;
             }
         }
 
-        /* Form section title */
-        .form-section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        /* About section badge */
-        .badge-reg {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            background: rgba(201, 162, 39, 0.15);
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            color: var(--accent);
-            margin-right: 8px;
-            margin-bottom: 6px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            background: var(--bg);
-            border-radius: 12px;
-            padding: 16px 20px;
-            border: 1px solid var(--border);
-        }
-        .info-grid .label {
-            color: var(--muted);
-            font-size: 13px;
-            font-weight: 500;
-        }
-        .info-grid .value {
-            color: var(--fg);
-            font-size: 14px;
-            font-weight: 600;
-            text-align: right;
-        }
-
-        @media (max-width: 480px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 6px;
+        /* Hide scrollbar on mobile but keep functionality */
+        @media (max-width: 640px) {
+            .form-modal::-webkit-scrollbar {
+                width: 2px;
             }
-            .info-grid .value {
-                text-align: left;
+        }
+
+        /* Bottom nav safe area */
+        @supports (padding: env(safe-area-inset-bottom)) {
+            .bottom-nav {
+                padding-bottom: env(safe-area-inset-bottom, 6px);
+            }
+        }
+
+        /* WhatsApp pulse animation */
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            background: #25D366;
+            z-index: -1;
+            animation: pulse-wa 2s infinite;
+        }
+        @keyframes pulse-wa {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .whatsapp-btn::before {
+                animation: none;
             }
         }
     </style>
@@ -905,43 +1288,41 @@
     NAVBAR
     ============================================================ -->
     <header class="navbar" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('home')">
-                    <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo" class="w-11 h-11 rounded-lg object-contain" />
-                    <div class="hidden sm:block">
-                        <h1 class="font-serif text-lg font-bold text-amber-400 leading-tight">INSTAQLIM</h1>
-                        <p class="text-xs text-emerald-300/70 leading-none">Maahad Tahfiz al-Quran lil Muttaqin</p>
-                    </div>
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-full flex items-center">
+            <div class="flex items-center gap-2 sm:gap-3 cursor-pointer" onclick="scrollToSection('home')">
+                <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo" class="w-9 h-9 sm:w-11 sm:h-11 rounded-lg object-contain" />
+                <div>
+                    <h1 class="font-serif text-sm sm:text-lg font-bold text-amber-400 leading-tight logo-text">INSTAQLIM</h1>
+                    <p class="text-[9px] sm:text-xs text-emerald-300/70 leading-none logo-sub">Maahad Tahfiz al-Quran lil Muttaqin</p>
                 </div>
-
-                <!-- Desktop Nav -->
-                <nav class="hidden md:flex items-center gap-6">
-                    <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Utama</a>
-                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Tentang</a>
-                    <a href="#features" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Keistimewaan</a>
-                    <a href="#dates" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Tarikh</a>
-                    <a href="#gallery" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Galeri</a>
-                    <a href="#products" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Produk</a>
-                    <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Hubungi</a>
-                    <button onclick="openForm()" class="px-6 py-2.5 bg-gradient-to-r from-[#c9a227] to-[#b8912a] text-[#0a0f0d] font-bold rounded-lg text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-amber-900/30">
-                        Daftar
-                    </button>
-                </nav>
-
-                <!-- Mobile Toggle -->
-                <button class="md:hidden text-amber-400 p-2" id="mobileToggle" aria-label="Toggle menu">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
             </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-4 lg:gap-6 ml-auto">
+                <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Utama</a>
+                <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Tentang</a>
+                <a href="#features" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Keistimewaan</a>
+                <a href="#dates" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Tarikh</a>
+                <a href="#gallery" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Galeri</a>
+                <a href="#products" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Produk</a>
+                <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Hubungi</a>
+                <button onclick="openForm()" class="px-5 py-2 bg-gradient-to-r from-[#c9a227] to-[#b8912a] text-[#0a0f0d] font-bold rounded-lg text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-amber-900/30">
+                    Daftar
+                </button>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-amber-400 p-2 ml-auto" id="mobileToggle" aria-label="Toggle menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu Overlay -->
     <div class="fixed inset-0 bg-[#0a0f0d]/98 z-40 hidden" id="mobileMenu">
-        <div class="flex flex-col items-center justify-center h-full gap-6 p-4">
+        <div class="flex flex-col items-center justify-center h-full gap-5 p-4">
             <a href="#home" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Utama</a>
             <a href="#about" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Tentang</a>
             <a href="#features" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Keistimewaan</a>
@@ -949,10 +1330,10 @@
             <a href="#gallery" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Galeri</a>
             <a href="#products" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Produk</a>
             <a href="#contact" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Hubungi</a>
-            <button onclick="openForm()" class="mt-4 px-8 py-3 bg-gradient-to-r from-[#c9a227] to-[#b8912a] text-[#0a0f0d] font-bold rounded-lg text-lg transition-all hover:scale-105">
+            <button onclick="openForm()" class="mt-2 px-8 py-3 bg-gradient-to-r from-[#c9a227] to-[#b8912a] text-[#0a0f0d] font-bold rounded-lg text-lg transition-all active:scale-95">
                 Daftar Sekarang
             </button>
-            <button class="absolute top-6 right-6 text-amber-400" id="closeMobileMenu" aria-label="Close menu">
+            <button class="absolute top-4 right-4 text-amber-400 p-2" id="closeMobileMenu" aria-label="Close menu">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -961,58 +1342,83 @@
     </div>
 
     <!-- ============================================================
+    BOTTOM NAV (Mobile)
+    ============================================================ -->
+    <nav class="bottom-nav md:hidden" id="bottomNav">
+        <a href="#home" class="active" data-section="home">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span class="nav-label">Utama</span>
+        </a>
+        <a href="#about" data-section="about">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="nav-label">Tentang</span>
+        </a>
+        <a href="#gallery" data-section="gallery">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span class="nav-label">Galeri</span>
+        </a>
+        <a href="#products" data-section="products">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+            <span class="nav-label">Produk</span>
+        </a>
+        <a href="#contact" data-section="contact">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span class="nav-label">Hubungi</span>
+        </a>
+    </nav>
+
+    <!-- ============================================================
     HERO SECTION
     ============================================================ -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative pt-24 pb-16 px-4 z-10">
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-16 pb-20 px-4 z-10" style="min-height: calc(100vh - 60px);">
         <div class="max-w-5xl mx-auto text-center">
-            <div class="mb-8 reveal stagger-1">
-                <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo INSTAQLIM" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl shadow-2xl shadow-amber-900/30 object-contain" />
+            <div class="mb-6 reveal stagger-1">
+                <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo INSTAQLIM" class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 mx-auto rounded-2xl shadow-2xl shadow-amber-900/30 object-contain" />
             </div>
 
-            <div class="mb-6 reveal stagger-2">
-                <span class="inline-block px-5 py-2.5 rounded-full border border-amber-600/30 bg-amber-900/20 text-amber-400 text-sm font-semibold tracking-wide">
+            <div class="mb-5 reveal stagger-2">
+                <span class="inline-block px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border border-amber-600/30 bg-amber-900/20 text-amber-400 text-xs sm:text-sm font-semibold tracking-wide">
                     🎓 Pengambilan 1448H / 2026 Kini Dibuka
                 </span>
             </div>
 
-            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 reveal stagger-3">
+            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-5 reveal stagger-3">
                 <span class="text-amber-400">Pendaftaran</span><br />
                 <span class="text-white">Pelajar Baru</span>
             </h1>
 
-            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed reveal stagger-4">
+            <p class="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed reveal stagger-4">
                 Menyemai Insan Bertaqwa Berjiwa Huffaz — bersama membangun generasi penghafaz al-Quran yang berketrampilan, berakhlak mulia, berilmu tinggi dan bertaqwa kepada Allah SWT.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal stagger-5">
-                <button onclick="openForm()" class="btn-primary text-lg">
+            <div class="flex flex-col sm:flex-row gap-3 justify-center reveal stagger-5">
+                <button onclick="openForm()" class="btn-primary text-base sm:text-lg">
                     <span>Daftar Sekarang</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                 </button>
-                <button onclick="scrollToSection('about')" class="btn-secondary">
+                <button onclick="scrollToSection('about')" class="btn-secondary text-base sm:text-lg">
                     Ketahui Lebih Lanjut
                 </button>
             </div>
 
-            <!-- Registration Badges -->
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 reveal stagger-6">
-                <span class="badge-reg">📋 PENDAFTARAN JAIS: 13S(3)38/202</span>
-                <span class="badge-reg">📜 KOD JAKIM: BZH 4031</span>
-                <span class="badge-reg">🏛️ Yayasan Peradaban Jawi Nusantara</span>
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-1 sm:gap-3 reveal stagger-6">
+                <span class="badge-reg">📋 JAIS: 13S(3)38/202</span>
+                <span class="badge-reg">📜 JAKIM: BZH 4031</span>
+                <span class="badge-reg">🏛️ YPJN</span>
             </div>
 
-            <div class="mt-12 flex items-center justify-center gap-4 reveal stagger-6">
-                <div class="h-[2px] w-16 bg-gradient-to-r from-transparent to-[#c9a227]"></div>
-                <svg class="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+            <div class="mt-10 sm:mt-16 flex items-center justify-center gap-3 sm:gap-4 reveal stagger-6">
+                <div class="h-[2px] w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#c9a227]"></div>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                 </svg>
-                <div class="h-[2px] w-16 bg-gradient-to-l from-transparent to-[#c9a227]"></div>
+                <div class="h-[2px] w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#c9a227]"></div>
             </div>
 
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-                <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce opacity-50 sm:bottom-8">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
             </div>
@@ -1022,25 +1428,25 @@
     <!-- ============================================================
     STATS SECTION
     ============================================================ -->
-    <section id="stats" class="py-16 px-4 z-10 relative">
+    <section id="stats" class="section-padding z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="glass-card p-8 md:p-12">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="glass-card p-5 sm:p-8 md:p-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-8 text-center">
                     <div class="reveal stagger-1">
                         <div class="counter-number" data-target="15">0</div>
-                        <p class="text-gray-400 mt-2 font-medium">Tahun Beroperasi</p>
+                        <p class="text-gray-400 mt-1 text-sm sm:text-base font-medium">Tahun Beroperasi</p>
                     </div>
                     <div class="reveal stagger-2">
                         <div class="counter-number" data-target="500">0</div>
-                        <p class="text-gray-400 mt-2 font-medium">Lepasan Pelajar</p>
+                        <p class="text-gray-400 mt-1 text-sm sm:text-base font-medium">Lepasan Pelajar</p>
                     </div>
                     <div class="reveal stagger-3">
                         <div class="counter-number" data-target="30">0</div>
-                        <p class="text-gray-400 mt-2 font-medium">Juzuk Hafazan</p>
+                        <p class="text-gray-400 mt-1 text-sm sm:text-base font-medium">Juzuk Hafazan</p>
                     </div>
                     <div class="reveal stagger-4">
                         <div class="counter-number" data-target="6">0</div>
-                        <p class="text-gray-400 mt-2 font-medium">Tenaga Pengajar</p>
+                        <p class="text-gray-400 mt-1 text-sm sm:text-base font-medium">Tenaga Pengajar</p>
                     </div>
                 </div>
             </div>
@@ -1050,56 +1456,52 @@
     <!-- ============================================================
     ABOUT SECTION
     ============================================================ -->
-    <section id="about" class="py-20 px-4 z-10 relative">
+    <section id="about" class="section-padding z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12 items-start">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 <div>
-                    <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Tentang Kami</p>
-                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6 reveal stagger-1">
+                    <p class="text-amber-400 text-xs sm:text-sm font-semibold tracking-wider uppercase reveal">Tentang Kami</p>
+                    <h2 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-5 reveal stagger-1">
                         Maahad Tahfiz al-Quran <br><span class="text-amber-400">lil Muttaqin (INSTAQLIM)</span>
                     </h2>
 
-                    <!-- Location -->
-                    <div class="flex items-start gap-3 mb-4 reveal stagger-2">
-                        <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex items-start gap-2 sm:gap-3 mb-4 reveal stagger-2">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                         <div>
-                            <p class="text-gray-300 font-medium">Mukim Ulu Semenyih, Daerah Hulu Langat</p>
-                            <p class="text-gray-400 text-sm">Selangor Darul Ehsan • Bersebelahan Hutan Rekreasi Air Terjun Sg. Tekala</p>
-                            <p class="text-gray-500 text-xs mt-1">Koordinat: 3°03'14.0"N 101°52'22.0"E</p>
+                            <p class="text-gray-300 text-sm sm:text-base font-medium">Mukim Ulu Semenyih, Daerah Hulu Langat</p>
+                            <p class="text-gray-400 text-xs sm:text-sm">Selangor • Bersebelahan Hutan Rekreasi Sg. Tekala</p>
+                            <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">Koordinat: 3°03'14.0"N 101°52'22.0"E</p>
                         </div>
                     </div>
 
-                    <!-- Registration Info -->
-                    <div class="info-grid mb-5 reveal stagger-3">
+                    <div class="info-grid mb-4 reveal stagger-3">
                         <span class="label">📋 Pendaftaran JAIS</span>
                         <span class="value">13S(3)38/202</span>
                         <span class="label">📜 Kod JAKIM</span>
                         <span class="value">BZH 4031</span>
                         <span class="label">🏛️ Naungan</span>
-                        <span class="value">Yayasan Peradaban Jawi Nusantara (YPJN)</span>
+                        <span class="value">Yayasan Peradaban Jawi Nusantara</span>
                     </div>
 
-                    <!-- Description -->
-                    <p class="text-gray-400 leading-relaxed mb-4 reveal stagger-4">
-                        <strong class="text-white">Tahfiz Integrasi &amp; Vokasional</strong> adalah aliran yang menjadi dasar kepada pendidikan di INSTAQLIM. Tidak menjadikan HAFALAN sebagai matlamat, sebaliknya sebagai <strong class="text-amber-400">ALAT (Tools)</strong> untuk mencapai <strong class="text-amber-400">FAHAM ALLAH secara KAFFAH</strong> (Al-Baqarah: 208).
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-3 reveal stagger-4">
+                        <strong class="text-white">Tahfiz Integrasi &amp; Vokasional</strong> adalah aliran dasar pendidikan. Tidak menjadikan HAFALAN sebagai matlamat, sebaliknya sebagai <strong class="text-amber-400">ALAT (Tools)</strong> untuk mencapai <strong class="text-amber-400">FAHAM ALLAH secara KAFFAH</strong> (Al-Baqarah: 208).
                     </p>
 
-                    <p class="text-gray-400 leading-relaxed mb-5 reveal stagger-5">
-                        <span class="text-amber-400 font-medium">"Hafazan bukan skill set, tetapi adalah tanggungjawab berterusan"</span> — hingga mampu membawa prinsip Khalifah yang memberi tauladan dengan Amali Al-Quran (Al-Baqarah: 185) sebagai <span class="text-amber-400">PETUNJUK, PENJELASAN &amp; PEMBEZA HAQ &amp; BATIL</span>.
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-4 reveal stagger-5">
+                        <span class="text-amber-400 font-medium">"Hafazan bukan skill set, tetapi tanggungjawab berterusan"</span> — membawa prinsip Khalifah dengan Amali Al-Quran sebagai <span class="text-amber-400">PETUNJUK, PENJELASAN &amp; PEMBEZA</span>.
                     </p>
 
-                    <!-- Vision & Mission -->
-                    <div class="grid sm:grid-cols-2 gap-4 reveal stagger-6">
-                        <div class="bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
-                            <h4 class="text-amber-400 font-bold text-sm mb-1">🎯 VISI</h4>
-                            <p class="text-gray-300 text-sm leading-relaxed">Menjadi Pusat Pendidikan lestari yang menjadikan <strong class="text-amber-400">Tadabbur Amali</strong> sebagai dasar.</p>
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4 reveal stagger-6">
+                        <div class="bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-3 sm:p-4">
+                            <h4 class="text-amber-400 font-bold text-xs sm:text-sm mb-0.5">🎯 VISI</h4>
+                            <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">Pusat Pendidikan lestari dengan <strong class="text-amber-400">Tadabbur Amali</strong>.</p>
                         </div>
-                        <div class="bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
-                            <h4 class="text-amber-400 font-bold text-sm mb-1">🌟 MISI</h4>
-                            <p class="text-gray-300 text-sm leading-relaxed">Melahirkan generasi Huffaz berakhlak Al-Quran yang berwawasan dan mampu memimpin masyarakat lokal dan global.</p>
+                        <div class="bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-3 sm:p-4">
+                            <h4 class="text-amber-400 font-bold text-xs sm:text-sm mb-0.5">🌟 MISI</h4>
+                            <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">Huffaz berakhlak Al-Quran, berwawasan, pemimpin global.</p>
                         </div>
                     </div>
                 </div>
@@ -1117,27 +1519,25 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-3 mt-5">
-                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center">
-                                <div class="text-amber-400 text-2xl font-bold font-serif">1448H</div>
-                                <p class="text-gray-400 text-xs">Tahun Pengambilan</p>
+                        <div class="grid grid-cols-2 gap-2 sm:gap-3 mt-4 sm:mt-5">
+                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-3 sm:p-4 text-center">
+                                <div class="text-amber-400 text-xl sm:text-2xl font-bold font-serif">1448H</div>
+                                <p class="text-gray-400 text-[10px] sm:text-xs">Tahun Pengambilan</p>
                             </div>
-                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center">
-                                <div class="text-amber-400 text-2xl font-bold">PBMS</div>
-                                <p class="text-gray-400 text-xs">Disediakan oleh</p>
+                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-3 sm:p-4 text-center">
+                                <div class="text-amber-400 text-xl sm:text-2xl font-bold">PBMS</div>
+                                <p class="text-gray-400 text-[10px] sm:text-xs">Disediakan oleh</p>
                             </div>
-                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center col-span-2">
-                                <div class="text-amber-400 text-lg font-semibold">📞 013-2079 409</div>
-                                <p class="text-gray-400 text-xs">www.instaqlim.com.my</p>
+                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-3 sm:p-4 text-center col-span-2">
+                                <div class="text-amber-400 text-base sm:text-lg font-semibold">📞 013-2079 409</div>
+                                <p class="text-gray-400 text-[10px] sm:text-xs">www.instaqlim.com.my</p>
                             </div>
                         </div>
 
-                        <div class="mt-5 bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
-                            <h4 class="text-amber-400 font-bold text-sm mb-2">📜 Sejarah Ringkas</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed">
-                                Diasaskan oleh <strong class="text-white">Allahyarham Mohamed Bin Abbas</strong> melalui gerakan <strong class="text-amber-400">Persatuan Belia Masjid Selangor (PBMS)</strong> dengan sokongan JAIS. 
-                                Cetusan awal didorong oleh Pengarah JAIS sewaktu lawatan pada 2010. 
-                                Kini INSTAQLIM berada di bawah naungan <strong class="text-amber-400">Yayasan Peradaban Jawi Nusantara (YPJN)</strong> sejak 2021.
+                        <div class="mt-4 sm:mt-5 bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-3 sm:p-4">
+                            <h4 class="text-amber-400 font-bold text-xs sm:text-sm mb-1">📜 Sejarah Ringkas</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                Diasaskan <strong class="text-white">Allahyarham Mohamed Bin Abbas</strong> melalui <strong class="text-amber-400">PBMS</strong> dengan sokongan JAIS. Cetusan idea Pengarah JAIS pada 2010. Kini di bawah <strong class="text-amber-400">YPJN</strong> sejak 2021.
                             </p>
                         </div>
                     </div>
@@ -1149,97 +1549,97 @@
     <!-- ============================================================
     FEATURES SECTION
     ============================================================ -->
-    <section id="features" class="py-20 px-4 z-10 relative">
+    <section id="features" class="section-padding z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Keistimewaan</p>
-                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 reveal stagger-1">
+            <div class="text-center mb-10 sm:mb-16">
+                <p class="text-amber-400 text-xs sm:text-sm font-semibold tracking-wider uppercase reveal">Keistimewaan</p>
+                <h2 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold mt-3 reveal stagger-1">
                     Kenapa <span class="text-amber-400">Pilih Kami</span>
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <div class="feature-card reveal stagger-1">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-5">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-3 sm:mb-5">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Hafazan 30 Juzuk</h3>
-                    <p class="text-gray-400 leading-relaxed">Program hafazan intensif 30 juzuk al-Quran dalam tempoh 3 hingga 5 tahun dengan bimbingan tenaga pengajar berpengalaman.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Hafazan 30 Juzuk</h3>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Program hafazan intensif 30 juzuk dalam 3-5 tahun dengan bimbingan tenaga pengajar berpengalaman.</p>
                 </div>
 
                 <div class="feature-card reveal stagger-2">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-5">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-3 sm:mb-5">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m8-10a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Kurikulum Integrasi &amp; Vokasional</h3>
-                    <p class="text-gray-400 leading-relaxed">Gabungan kurikulum tahfiz, akademik kebangsaan dan TVET yang diiktiraf oleh JAIS serta selari dengan Dasar Tahfiz Negara.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Integrasi &amp; Vokasional</h3>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Gabungan tahfiz, akademik dan TVET diiktiraf JAIS selari Dasar Tahfiz Negara.</p>
                 </div>
 
                 <div class="feature-card reveal stagger-3">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-5">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-3 sm:mb-5">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Asrama Penuh &amp; Alam Semula Jadi</h3>
-                    <p class="text-gray-400 leading-relaxed">Persekitaran pembelajaran yang kondusif berhampiran hutan rekreasi Air Terjun Sg. Tekala, menggalakkan pembentukan sahsiah dan disiplin.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Asrama &amp; Alam Semula Jadi</h3>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">Persekitaran kondusif berhampiran hutan rekreasi Sg. Tekala, pembentukan sahsiah dan disiplin.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-    IMPORTANT DATES SECTION (DIKEMASKINI)
+    IMPORTANT DATES SECTION
     ============================================================ -->
-    <section id="dates" class="py-20 px-4 z-10 relative">
+    <section id="dates" class="section-padding z-10 relative">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Penting</p>
-                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 reveal stagger-1">
+            <div class="text-center mb-10 sm:mb-16">
+                <p class="text-amber-400 text-xs sm:text-sm font-semibold tracking-wider uppercase reveal">Penting</p>
+                <h2 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold mt-3 reveal stagger-1">
                     Tarikh <span class="text-amber-400">Penting</span>
                 </h2>
-                <p class="text-gray-400 mt-3 reveal stagger-2">Pengambilan Sesi 1448H / 2026</p>
+                <p class="text-gray-400 text-sm sm:text-base mt-2 reveal stagger-2">Pengambilan Sesi 1448H / 2026</p>
             </div>
 
-            <div class="glass-card p-8 md:p-12 relative">
+            <div class="glass-card p-5 sm:p-8 md:p-12 relative">
                 <div class="corner corner-tl"></div>
                 <div class="corner corner-tr"></div>
                 <div class="corner corner-bl"></div>
                 <div class="corner corner-br"></div>
 
-                <div class="space-y-6 relative">
+                <div class="space-y-4 sm:space-y-6 relative">
                     <div class="timeline-item reveal stagger-1">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">1 Jun 2026</span>
-                            <span class="text-gray-300">Pembukaan Pendaftaran Online</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <span class="text-amber-400 font-bold date sm:w-48 flex-shrink-0">1 Jun 2026</span>
+                            <span class="text-gray-300 event">Pembukaan Pendaftaran Online</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-2">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">25 Okt 2026</span>
-                            <span class="text-gray-300">Tutup Pendaftaran</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <span class="text-amber-400 font-bold date sm:w-48 flex-shrink-0">25 Okt 2026</span>
+                            <span class="text-gray-300 event">Tutup Pendaftaran</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-3">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">5 - 15 Dis 2026</span>
-                            <span class="text-gray-300">Temuduga</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <span class="text-amber-400 font-bold date sm:w-48 flex-shrink-0">5 - 15 Dis 2026</span>
+                            <span class="text-gray-300 event">Temuduga</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-4">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">20 Dis 2026</span>
-                            <span class="text-gray-300">Pengumuman Keputusan</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <span class="text-amber-400 font-bold date sm:w-48 flex-shrink-0">20 Dis 2026</span>
+                            <span class="text-gray-300 event">Pengumuman Keputusan</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-5">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">21 Jan 2027</span>
-                            <span class="text-gray-300">Hari Pendaftaran &amp; Orientasi</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <span class="text-amber-400 font-bold date sm:w-48 flex-shrink-0">21 Jan 2027</span>
+                            <span class="text-gray-300 event">Hari Pendaftaran &amp; Orientasi</span>
                         </div>
                     </div>
                 </div>
@@ -1248,28 +1648,27 @@
     </section>
 
     <!-- ============================================================
-    GALLERY SECTION (BARU)
+    GALLERY SECTION
     ============================================================ -->
-    <section id="gallery" class="py-20 px-4 z-10 relative">
+    <section id="gallery" class="section-padding z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Galeri</p>
-                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 reveal stagger-1">
+            <div class="text-center mb-8 sm:mb-16">
+                <p class="text-amber-400 text-xs sm:text-sm font-semibold tracking-wider uppercase reveal">Galeri</p>
+                <h2 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold mt-3 reveal stagger-1">
                     Aktiviti <span class="text-amber-400">INSTAQLIM</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mt-4 reveal stagger-2">
+                <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mt-2 reveal stagger-2">
                     Gambar-gambar aktiviti dan program sepanjang tahun di Maahad Tahfiz al-Quran lil Muttaqin.
                 </p>
             </div>
 
             <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be rendered by JavaScript -->
+                <!-- Rendered by JavaScript -->
             </div>
 
-            <!-- Admin note for updating gallery -->
-            <div class="mt-8 text-center reveal stagger-6">
-                <p class="text-gray-500 text-sm border border-[#2a3d32] rounded-lg p-4 inline-block bg-[#151f1a]/50">
-                    <span class="text-amber-400">📸</span> Untuk mengemaskini galeri, ubah suai array <code class="text-amber-400">galleryImages</code> dalam JavaScript.
+            <div class="mt-6 sm:mt-8 text-center reveal stagger-6">
+                <p class="text-gray-500 text-xs sm:text-sm border border-[#2a3d32] rounded-lg p-3 sm:p-4 inline-block bg-[#151f1a]/50">
+                    <span class="text-amber-400">📸</span> Untuk kemaskini galeri, ubah array <code class="text-amber-400 text-xs sm:text-sm">galleryImages</code> dalam JavaScript.
                 </p>
             </div>
         </div>
@@ -1278,86 +1677,86 @@
     <!-- ============================================================
     PRODUCTS SECTION
     ============================================================ -->
-    <section id="products" class="py-20 px-4 z-10 relative">
+    <section id="products" class="section-padding z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Produk &amp; Perkhidmatan</p>
-                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 reveal stagger-1">
+            <div class="text-center mb-8 sm:mb-16">
+                <p class="text-amber-400 text-xs sm:text-sm font-semibold tracking-wider uppercase reveal">Produk &amp; Perkhidmatan</p>
+                <h2 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold mt-3 reveal stagger-1">
                     Inisiatif <span class="text-amber-400">Kami</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mt-4 reveal stagger-2">
-                    Terokai pelbagai program dan perkhidmatan yang disediakan untuk masyarakat.
+                <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto mt-2 reveal stagger-2">
+                    Terokai pelbagai program dan perkhidmatan untuk masyarakat.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 <a href="https://ncms.yzza.io/jualan_amal_instaqlim" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-1 group">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Jualan Amal</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Sumbangan untuk program kebajikan dan pembangunan maahad.</p>
-                    <div class="mt-4 flex items-center text-amber-400 text-sm font-medium gap-1 group-hover:gap-2 transition-all">
+                    <h3 class="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2">Jualan Amal</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed hidden sm:block">Sumbangan untuk kebajikan dan pembangunan maahad.</p>
+                    <div class="mt-2 sm:mt-4 flex items-center text-amber-400 text-xs sm:text-sm font-medium gap-1 group-hover:gap-2 transition-all">
                         <span>Terokai</span>
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
                     </div>
                 </a>
 
                 <a href="https://stiqdat.interactivelink.site/zakat" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-2 group">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Zakat</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Platform pembayaran zakat yang mudah dan selamat.</p>
-                    <div class="mt-4 flex items-center text-amber-400 text-sm font-medium gap-1 group-hover:gap-2 transition-all">
+                    <h3 class="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2">Zakat</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed hidden sm:block">Platform pembayaran zakat mudah dan selamat.</p>
+                    <div class="mt-2 sm:mt-4 flex items-center text-amber-400 text-xs sm:text-sm font-medium gap-1 group-hover:gap-2 transition-all">
                         <span>Terokai</span>
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
                     </div>
                 </a>
 
                 <a href="https://stiqdat.interactivelink.site" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-3 group">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Ibadah Qurban</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Program korban dengan pengurusan profesional dan telus.</p>
-                    <div class="mt-4 flex items-center text-amber-400 text-sm font-medium gap-1 group-hover:gap-2 transition-all">
+                    <h3 class="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2">Ibadah Qurban</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed hidden sm:block">Program korban profesional dan telus.</p>
+                    <div class="mt-2 sm:mt-4 flex items-center text-amber-400 text-xs sm:text-sm font-medium gap-1 group-hover:gap-2 transition-all">
                         <span>Terokai</span>
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
                     </div>
                 </a>
 
                 <a href="https://stiqdat.interactivelink.site/KODJAWI-BUNYI" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-4 group">
-                    <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 sm:w-7 sm:h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Kod Jawi</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Sumber pembelajaran tulisan Jawi interaktif dan audio.</p>
-                    <div class="mt-4 flex items-center text-amber-400 text-sm font-medium gap-1 group-hover:gap-2 transition-all">
+                    <h3 class="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2">Kod Jawi</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed hidden sm:block">Sumber pembelajaran Jawi interaktif & audio.</p>
+                    <div class="mt-2 sm:mt-4 flex items-center text-amber-400 text-xs sm:text-sm font-medium gap-1 group-hover:gap-2 transition-all">
                         <span>Terokai</span>
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
                     </div>
                 </a>
             </div>
 
-            <div class="text-center mt-12 reveal stagger-5">
-                <button onclick="openForm()" class="btn-primary text-lg px-12 py-4">
+            <div class="text-center mt-8 sm:mt-12 reveal stagger-5">
+                <button onclick="openForm()" class="btn-primary text-base sm:text-lg px-8 sm:px-12 py-3 sm:py-4">
                     <span>📝 Daftar Pelajar Baru</span>
                 </button>
             </div>
@@ -1368,23 +1767,23 @@
     CTA SECTION
     ============================================================ -->
     <section id="cta" class="z-10 relative">
-        <div class="w-full bg-gradient-to-r from-[#c9a227] to-[#b8912a] py-20 px-4">
+        <div class="w-full bg-gradient-to-r from-[#c9a227] to-[#b8912a] py-12 sm:py-20 px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0a0f0d] mb-4 reveal">
+                <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-[#0a0f0d] mb-3 reveal">
                     Sedia Menjadi Huffaz?
                 </h2>
-                <p class="text-[#0a0f0d]/80 text-lg mb-8 max-w-2xl mx-auto reveal stagger-1">
+                <p class="text-[#0a0f0d]/80 text-sm sm:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto reveal stagger-1">
                     Daftar sekarang dan mulakan perjalanan anda menghafaz al-Quran dalam persekitaran yang kondusif dan berdisiplin.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center reveal stagger-2">
-                    <button onclick="openForm()" class="btn-cta">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center reveal stagger-2">
+                    <button onclick="openForm()" class="btn-cta text-sm sm:text-base">
                         <span>Daftar Sekarang</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
                     </button>
-                    <a href="https://infoINSTAQLIM.wasap.my" target="_blank" rel="noopener noreferrer" class="btn-cta-outline">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="https://infoINSTAQLIM.wasap.my" target="_blank" rel="noopener noreferrer" class="btn-cta-outline text-sm sm:text-base">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
                         <span>Hubungi Kami</span>
@@ -1397,44 +1796,44 @@
     <!-- ============================================================
     CONTACT SECTION
     ============================================================ -->
-    <section id="contact" class="py-20 px-4 z-10 relative">
+    <section id="contact" class="section-padding z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="glass-card p-8 md:p-12">
-                <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card p-5 sm:p-8 md:p-12">
+                <div class="grid sm:grid-cols-3 gap-6 sm:gap-8">
                     <div class="text-center reveal stagger-1">
-                        <div class="w-14 h-14 rounded-full bg-emerald-900 flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-900 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <h4 class="font-bold text-white mb-2">Alamat</h4>
-                        <p class="text-gray-400 text-sm">
-                            Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM)<br />
-                            Mukim Ulu Semenyih, Daerah Hulu Langat<br />
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1">Alamat</h4>
+                        <p class="text-gray-400 text-xs sm:text-sm">
+                            Maahad Tahfiz al-Quran lil Muttaqin<br />
+                            Mukim Ulu Semenyih<br />
                             Selangor Darul Ehsan
                         </p>
                     </div>
                     <div class="text-center reveal stagger-2">
-                        <div class="w-14 h-14 rounded-full bg-emerald-900 flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-900 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                         </div>
-                        <h4 class="font-bold text-white mb-2">Telefon</h4>
-                        <p class="text-gray-400 text-sm">
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1">Telefon</h4>
+                        <p class="text-gray-400 text-xs sm:text-sm">
                             +6013-2079 409<br />
                             +6013-6724 313
                         </p>
                     </div>
                     <div class="text-center reveal stagger-3">
-                        <div class="w-14 h-14 rounded-full bg-emerald-900 flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-900 flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </div>
-                        <h4 class="font-bold text-white mb-2">Email &amp; Web</h4>
-                        <p class="text-gray-400 text-sm">
+                        <h4 class="font-bold text-white text-sm sm:text-base mb-1">Email &amp; Web</h4>
+                        <p class="text-gray-400 text-xs sm:text-sm">
                             mtaq.lilmuttaqin@gmail.com<br />
                             <a href="https://www.instaqlim.com.my" target="_blank" class="text-amber-400 hover:underline">www.instaqlim.com.my</a>
                         </p>
@@ -1447,17 +1846,17 @@
     <!-- ============================================================
     FOOTER
     ============================================================ -->
-    <footer class="py-8 px-4 border-t border-[#2a3d32] z-10 relative">
+    <footer class="py-6 sm:py-8 px-4 border-t border-[#2a3d32] z-10 relative" style="margin-bottom: 56px;">
         <div class="max-w-6xl mx-auto text-center">
-            <p class="text-gray-500 text-sm">© 2026 Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM). Hak Cipta Terpelihara.</p>
-            <p class="text-gray-600 text-xs mt-1">Disediakan oleh Persatuan Belia Masjid Selangor • Yayasan Peradaban Jawi Nusantara</p>
+            <p class="text-gray-500 text-xs sm:text-sm">© 2026 Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM). Hak Cipta Terpelihara.</p>
+            <p class="text-gray-600 text-[10px] sm:text-xs mt-1">Disediakan oleh Persatuan Belia Masjid Selangor • Yayasan Peradaban Jawi Nusantara</p>
         </div>
     </footer>
 
     <!-- ============================================================
     WHATSAPP FLOATING BUTTON
     ============================================================ -->
-    <a href="https://infoINSTAQLIM.wasap.my" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat WhatsApp untuk maklumat lanjut">
+    <a href="https://infoINSTAQLIM.wasap.my" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat WhatsApp">
         <div class="whatsapp-btn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -1476,14 +1875,14 @@
     </div>
 
     <!-- ============================================================
-    FORM OVERLAY / MODAL
+    FORM OVERLAY
     ============================================================ -->
     <div class="form-overlay" id="formOverlay" onclick="closeFormOutside(event)">
         <div class="form-modal">
             <button class="btn-close-modal" onclick="closeForm()" aria-label="Tutup borang">✕</button>
 
-            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-amber-400 mb-2 text-center">📝 Borang Pendaftaran</h2>
-            <p class="text-gray-400 text-center text-sm mb-6">Sesi 1448H / 2026 • Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM)</p>
+            <h2 class="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-amber-400 mb-1 text-center">📝 Borang Pendaftaran</h2>
+            <p class="text-gray-400 text-center text-xs sm:text-sm mb-4 sm:mb-6">Sesi 1448H / 2026 • INSTAQLIM</p>
 
             <form id="registrationForm" action="https://formsubmit.co/pendaftar.instaqlim@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="Pendaftaran Pelajar Baru - INSTAQLIM 1448H" />
@@ -1491,16 +1890,16 @@
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value="" />
 
-                <div class="mb-6">
+                <div class="mb-4 sm:mb-6">
                     <h3 class="form-section-title">👤 Maklumat Pelajar</h3>
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
                         <div>
                             <label class="form-label">Nama Penuh <span>*</span></label>
                             <input type="text" name="nama_pelajar" class="form-input" placeholder="Nama mengikut kad pengenalan" required />
                         </div>
                         <div>
                             <label class="form-label">No. Kad Pengenalan <span>*</span></label>
-                            <input type="text" name="no_kp" class="form-input" placeholder="Contoh: 120101011234" maxlength="12" required />
+                            <input type="text" name="no_kp" class="form-input" placeholder="120101011234" maxlength="12" required />
                         </div>
                         <div>
                             <label class="form-label">Tarikh Lahir <span>*</span></label>
@@ -1509,40 +1908,40 @@
                         <div>
                             <label class="form-label">Jantina <span>*</span></label>
                             <select name="jantina" class="form-input" required>
-                                <option value="">Pilih jantina</option>
+                                <option value="">Pilih</option>
                                 <option value="Lelaki">Lelaki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
-                        <div class="md:col-span-2">
+                        <div class="sm:col-span-2">
                             <label class="form-label">Alamat Rumah <span>*</span></label>
-                            <textarea name="alamat" class="form-input" rows="2" placeholder="Alamat lengkap termasuk poskod dan negeri" required></textarea>
+                            <textarea name="alamat" class="form-input" rows="2" placeholder="Alamat lengkap" required></textarea>
                         </div>
                         <div>
                             <label class="form-label">Sekolah Asal <span>*</span></label>
-                            <input type="text" name="sekolah_asal" class="form-input" placeholder="Nama sekolah terakhir" required />
+                            <input type="text" name="sekolah_asal" class="form-input" placeholder="Nama sekolah" required />
                         </div>
                         <div>
-                            <label class="form-label">Tingkatan / Darjah <span>*</span></label>
+                            <label class="form-label">Tingkatan <span>*</span></label>
                             <select name="tingkatan" class="form-input" required>
-                                <option value="">Pilih tingkatan</option>
-                                <option value="Tahun 6">Tahun 6 (PSRA/UPKK)</option>
+                                <option value="">Pilih</option>
+                                <option value="Tahun 6">Tahun 6</option>
                                 <option value="Tingkatan 1">Tingkatan 1</option>
                                 <option value="Tingkatan 2">Tingkatan 2</option>
-                                <option value="Tingkatan 3">Tingkatan 3 (PMR/PT3)</option>
+                                <option value="Tingkatan 3">Tingkatan 3</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-4 sm:mb-6">
                     <h3 class="form-section-title">📖 Maklumat Hafazan</h3>
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
                         <div>
-                            <label class="form-label">Tahap Hafazan Semasa <span>*</span></label>
+                            <label class="form-label">Tahap Hafazan <span>*</span></label>
                             <select name="tahap_hafazan" class="form-input" required>
-                                <option value="">Pilih tahap</option>
-                                <option value="Belum Mula">Belum mula menghafaz</option>
+                                <option value="">Pilih</option>
+                                <option value="Belum Mula">Belum mula</option>
                                 <option value="1-5 Juz">1 - 5 Juz</option>
                                 <option value="6-10 Juz">6 - 10 Juz</option>
                                 <option value="11-15 Juz">11 - 15 Juz</option>
@@ -1552,56 +1951,56 @@
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">Pengalaman Tahfiz Terdahulu</label>
-                            <input type="text" name="pengalaman_tahfiz" class="form-input" placeholder="Nama institusi tahfiz (jika ada)" />
+                            <label class="form-label">Pengalaman Tahfiz</label>
+                            <input type="text" name="pengalaman_tahfiz" class="form-input" placeholder="Nama institusi" />
                         </div>
-                        <div>
-                            <label class="form-label">Kemahiran Membaca Al-Quran <span>*</span></label>
+                        <div class="sm:col-span-2">
+                            <label class="form-label">Kemahiran Membaca <span>*</span></label>
                             <select name="kemahiran_quran" class="form-input" required>
-                                <option value="">Pilih tahap</option>
+                                <option value="">Pilih</option>
                                 <option value="Lancar">Lancar dengan tajwid</option>
                                 <option value="Sederhana">Sederhana lancar</option>
-                                <option value="Baru Belajar">Masih belajar mengenal huruf</option>
+                                <option value="Baru Belajar">Masih belajar</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-4 sm:mb-6">
                     <h3 class="form-section-title">👨‍👩‍👦 Maklumat Ibu Bapa / Penjaga</h3>
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
                         <div>
                             <label class="form-label">Nama Bapa <span>*</span></label>
-                            <input type="text" name="nama_bapa" class="form-input" placeholder="Nama penuh bapa" required />
+                            <input type="text" name="nama_bapa" class="form-input" placeholder="Nama penuh" required />
                         </div>
                         <div>
                             <label class="form-label">No. Telefon Bapa <span>*</span></label>
-                            <input type="tel" name="telefon_bapa" class="form-input" placeholder="Contoh: 0123456789" required />
+                            <input type="tel" name="telefon_bapa" class="form-input" placeholder="0123456789" required />
                         </div>
                         <div>
                             <label class="form-label">Pekerjaan Bapa <span>*</span></label>
-                            <input type="text" name="pekerjaan_bapa" class="form-input" placeholder="Pekerjaan semasa" required />
+                            <input type="text" name="pekerjaan_bapa" class="form-input" placeholder="Pekerjaan" required />
                         </div>
                         <div>
                             <label class="form-label">Nama Ibu <span>*</span></label>
-                            <input type="text" name="nama_ibu" class="form-input" placeholder="Nama penuh ibu" required />
+                            <input type="text" name="nama_ibu" class="form-input" placeholder="Nama penuh" required />
                         </div>
                         <div>
                             <label class="form-label">No. Telefon Ibu <span>*</span></label>
-                            <input type="tel" name="telefon_ibu" class="form-input" placeholder="Contoh: 0123456789" required />
+                            <input type="tel" name="telefon_ibu" class="form-input" placeholder="0123456789" required />
                         </div>
                         <div>
                             <label class="form-label">Pekerjaan Ibu <span>*</span></label>
-                            <input type="text" name="pekerjaan_ibu" class="form-input" placeholder="Pekerjaan semasa" required />
+                            <input type="text" name="pekerjaan_ibu" class="form-input" placeholder="Pekerjaan" required />
                         </div>
                         <div>
-                            <label class="form-label">Email Ibu Bapa <span>*</span></label>
+                            <label class="form-label">Email <span>*</span></label>
                             <input type="email" name="email_ibubapa" class="form-input" placeholder="contoh@email.com" required />
                         </div>
                         <div>
-                            <label class="form-label">Pendapatan Isi Rumah <span>*</span></label>
+                            <label class="form-label">Pendapatan <span>*</span></label>
                             <select name="pendapatan" class="form-input" required>
-                                <option value="">Pilih julat pendapatan</option>
+                                <option value="">Pilih</option>
                                 <option value="Bawah RM2000">Bawah RM2,000</option>
                                 <option value="RM2000 - RM4000">RM2,000 - RM4,000</option>
                                 <option value="RM4001 - RM6000">RM4,001 - RM6,000</option>
@@ -1613,35 +2012,35 @@
                     </div>
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-4 sm:mb-6">
                     <h3 class="form-section-title">🏥 Maklumat Kesihatan</h3>
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
                         <div>
-                            <label class="form-label">Status Kesihatan Am <span>*</span></label>
+                            <label class="form-label">Status Kesihatan <span>*</span></label>
                             <select name="status_kesihatan" class="form-input" required>
-                                <option value="">Pilih status</option>
+                                <option value="">Pilih</option>
                                 <option value="Sihat">Sihat</option>
-                                <option value="Ada Masalah Kesihatan">Ada masalah kesihatan</option>
+                                <option value="Ada Masalah Kesihatan">Ada masalah</option>
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">Penyakit / Alergi (jika ada)</label>
+                            <label class="form-label">Penyakit / Alergi</label>
                             <input type="text" name="penyakit" class="form-input" placeholder="Nyatakan jika ada" />
                         </div>
                     </div>
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-4 sm:mb-6">
                     <label class="custom-checkbox">
                         <input type="checkbox" name="pengakuan" required />
                         <span class="check-mark"></span>
-                        <span class="check-label">Saya mengakui bahawa semua maklumat yang diberikan adalah benar dan saya bersetuju dengan syarat dan ketentuan pendaftaran Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM).</span>
+                        <span class="check-label">Saya mengakui maklumat adalah benar dan bersetuju dengan syarat pendaftaran INSTAQLIM.</span>
                     </label>
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn-primary w-full sm:w-auto px-10 py-3.5 text-base">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button type="submit" class="btn-primary w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-3.5 text-sm sm:text-base">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         Hantar Pendaftaran
@@ -1651,12 +2050,12 @@
 
             <div class="success-message" id="successMessage">
                 <div class="success-icon">
-                    <svg class="w-10 h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <h3 class="font-serif text-2xl text-amber-400 mb-3">✅ Pendaftaran Berjaya Dihantar</h3>
-                <p class="text-gray-400 mb-5">Terima kasih kerana mendaftar. Kami akan menghubungi anda dalam masa 3-5 hari bekerja.</p>
+                <h3 class="font-serif text-xl sm:text-2xl text-amber-400 mb-2">✅ Pendaftaran Berjaya</h3>
+                <p class="text-gray-400 text-sm sm:text-base mb-4">Terima kasih. Kami akan hubungi anda dalam 3-5 hari bekerja.</p>
                 <button onclick="closeForm()" class="btn-primary">Tutup</button>
             </div>
         </div>
@@ -1674,10 +2073,10 @@
             caption: 'Logo & Identiti INSTAQLIM'
         }, {
             src: 'https://arleta.site/interactivelink/2950/Logo-5-Big.jpg',
-            caption: 'Logo Rasmi Maahad Tahfiz al-Quran lil Muttaqin'
+            caption: 'Logo Rasmi Maahad Tahfiz'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Program+Hafazan',
-            caption: 'Sesi Hafazan & Tadabbur Al-Quran'
+            caption: 'Sesi Hafazan & Tadabbur'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Kelas+Integrasi',
             caption: 'Kelas Integrasi & Vokasional'
@@ -1686,7 +2085,7 @@
             caption: 'Aktiviti Luaran & Sukan'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=TVET+Fertigasi',
-            caption: 'Latihan TVET - Fertigasi & Akuakultur'
+            caption: 'Latihan TVET - Fertigasi'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Program+Kebajikan',
             caption: 'Program Kebajikan & Masyarakat'
@@ -1695,16 +2094,16 @@
             caption: 'Suasana Asrama & Persekitaran'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Kuliah+Subuh',
-            caption: 'Kuliah Subuh & Tazkirah Harian'
+            caption: 'Kuliah Subuh & Tazkirah'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Lawatan+Kehormat',
-            caption: 'Lawatan Kehormat dari JAIS & PBMS'
+            caption: 'Lawatan Kehormat dari JAIS'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Konvokesyen',
-            caption: 'Majlis Konvokesyen & Graduasi Huffaz'
+            caption: 'Majlis Konvokesyen & Graduasi'
         }, {
             src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Program+Qurban',
-            caption: 'Program Ibadah Qurban & Korban'
+            caption: 'Program Ibadah Qurban'
         }];
 
         // ============================================================
@@ -1724,14 +2123,13 @@
                     </div>
                 `).join('');
 
-            // Re-trigger reveal animations for gallery items
             setTimeout(() => {
                 document.querySelectorAll('#galleryGrid .gallery-item').forEach((el, i) => {
                     setTimeout(() => {
                         el.classList.add('visible');
-                    }, i * 100);
+                    }, i * 80);
                 });
-            }, 300);
+            }, 200);
         }
 
         // ============================================================
@@ -1773,6 +2171,7 @@
         const scrollProgress = document.getElementById('scrollProgress');
         const sections = ['home', 'about', 'features', 'dates', 'gallery', 'products', 'contact'];
         const navLinks = document.querySelectorAll('.nav-link');
+        const bottomNavLinks = document.querySelectorAll('.bottom-nav a');
 
         function updateNavbar() {
             const scrollY = window.scrollY;
@@ -1801,6 +2200,15 @@
                     link.classList.add('text-gray-300');
                 }
             });
+
+            bottomNavLinks.forEach(link => {
+                const section = link.dataset.section;
+                if (section === current) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         }
 
         window.addEventListener('scroll', updateNavbar);
@@ -1821,6 +2229,14 @@
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const id = this.getAttribute('href').substring(1);
+                scrollToSection(id);
+            });
+        });
+
+        bottomNavLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.dataset.section;
                 scrollToSection(id);
             });
         });
@@ -1859,8 +2275,8 @@
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
+            threshold: 0.08,
+            rootMargin: '0px 0px -20px 0px'
         });
 
         document.querySelectorAll('.reveal').forEach(el => {
@@ -1907,7 +2323,7 @@
                     statsObserver.disconnect();
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.3 });
 
         const statsSection = document.getElementById('stats');
         if (statsSection) statsObserver.observe(statsSection);
@@ -1985,11 +2401,10 @@
         // ============================================================
         renderGallery();
 
-        console.log('🚀 INSTAQLIM — Maahad Tahfiz al-Quran lil Muttaqin');
+        console.log('🚀 INSTAQLIM — Mobile Friendly Landing Page');
         console.log('📌 Sesi 1448H / 2026 | Pendaftaran Pelajar Baru');
-        console.log('📸 Galeri: ' + galleryImages.length + ' gambar dimuatkan');
-        console.log('📝 Klik butang "Daftar" untuk membuka borang pendaftaran.');
-        console.log('🔄 Untuk kemaskini galeri, ubah array "galleryImages" dalam JavaScript.');
+        console.log('📸 Galeri: ' + galleryImages.length + ' gambar');
+        console.log('📱 Bottom nav untuk mobile | Klik butang "Daftar" untuk borang.');
     </script>
 </body>
 </html>
