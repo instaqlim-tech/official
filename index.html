@@ -719,6 +719,51 @@
             padding-bottom: 10px;
             border-bottom: 2px solid var(--border);
         }
+
+        /* About section badge */
+        .badge-reg {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--accent);
+            margin-right: 8px;
+            margin-bottom: 6px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+        }
+        .info-grid .label {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .info-grid .value {
+            color: var(--fg);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .info-grid .value {
+                text-align: left;
+            }
+        }
     </style>
 </head>
 <body>
@@ -745,8 +790,8 @@
                 <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('home')">
                     <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo" class="w-11 h-11 rounded-lg object-contain" />
                     <div class="hidden sm:block">
-                        <h1 class="font-serif text-lg font-bold text-amber-400 leading-tight">Maahad Tahfiz</h1>
-                        <p class="text-xs text-emerald-300/70 leading-none">lil Muttaqin</p>
+                        <h1 class="font-serif text-lg font-bold text-amber-400 leading-tight">INSTAQLIM</h1>
+                        <p class="text-xs text-emerald-300/70 leading-none">Maahad Tahfiz al-Quran lil Muttaqin</p>
                     </div>
                 </div>
 
@@ -799,12 +844,12 @@
     <section id="home" class="min-h-screen flex items-center justify-center relative pt-24 pb-16 px-4 z-10">
         <div class="max-w-5xl mx-auto text-center">
             <div class="mb-8 reveal stagger-1">
-                <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl shadow-2xl shadow-amber-900/30 object-contain" />
+                <img src="https://arleta.site/interactivelink/2950/Logo-5-Big.jpg" alt="Logo INSTAQLIM" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl shadow-2xl shadow-amber-900/30 object-contain" />
             </div>
 
             <div class="mb-6 reveal stagger-2">
                 <span class="inline-block px-5 py-2.5 rounded-full border border-amber-600/30 bg-amber-900/20 text-amber-400 text-sm font-semibold tracking-wide">
-                    🎓 Pengambilan Mei 2026 Kini Dibuka
+                    🎓 Pengambilan 1448H / 2026 Kini Dibuka
                 </span>
             </div>
 
@@ -814,7 +859,7 @@
             </h1>
 
             <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed reveal stagger-4">
-                Bersama membangun generasi penghafaz al-Quran yang berketrampilan, berakhlak mulia, berilmu tinggi dan bertaqwa kepada Allah SWT.
+                Menyemai Insan Bertaqwa Berjiwa Huffaz — bersama membangun generasi penghafaz al-Quran yang berketrampilan, berakhlak mulia, berilmu tinggi dan bertaqwa kepada Allah SWT.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center reveal stagger-5">
@@ -829,7 +874,14 @@
                 </button>
             </div>
 
-            <div class="mt-16 flex items-center justify-center gap-4 reveal stagger-6">
+            <!-- Registration Badges -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3 reveal stagger-6">
+                <span class="badge-reg">📋 PENDAFTARAN JAIS: 13S(3)38/202</span>
+                <span class="badge-reg">📜 KOD JAKIM: BZH 4031</span>
+                <span class="badge-reg">🏛️ Yayasan Peradaban Jawi Nusantara</span>
+            </div>
+
+            <div class="mt-12 flex items-center justify-center gap-4 reveal stagger-6">
                 <div class="h-[2px] w-16 bg-gradient-to-r from-transparent to-[#c9a227]"></div>
                 <svg class="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -874,55 +926,100 @@
     </section>
 
     <!-- ============================================================
-    ABOUT SECTION
+    ABOUT SECTION (DIKEMASKINI DENGAN INFO DARI PDF)
     ============================================================ -->
     <section id="about" class="py-20 px-4 z-10 relative">
         <div class="max-w-6xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <div>
                     <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Tentang Kami</p>
                     <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6 reveal stagger-1">
-                        Menyemai <span class="text-amber-400">Insan</span> Bertaqwa Berjiwa Huffaz
+                        Maahad Tahfiz al-Quran <br><span class="text-amber-400">lil Muttaqin (INSTAQLIM)</span>
                     </h2>
-                    <p class="text-gray-400 leading-relaxed mb-6 reveal stagger-2">
-                        Maahad Tahfiz al-Quran lil Muttaqin adalah sebuah institusi pendidikan Islam yang fokus kepada penghafazan al-Quran, Tadabbur Al-Quran yang distrukturkan dalam bentuk Latihan Vokasional selari dengan kurikulum akademik kebangsaan serta menjunjung Dasar Tahfiz Negara dan Dasar TVET Negara sebagai integrasi kurikulum. Visi kami adalah melahirkan huffaz yang bukan sahaja menghafaz 30 juzuk al-Quran, malah memahami makna dan mengamalkan ajaran suci al-Quran dalam kehidupan harian.
+
+                    <!-- Location -->
+                    <div class="flex items-start gap-3 mb-4 reveal stagger-2">
+                        <svg class="w-5 h-5 text-amber-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <div>
+                            <p class="text-gray-300 font-medium">Mukim Ulu Semenyih, Daerah Hulu Langat</p>
+                            <p class="text-gray-400 text-sm">Selangor Darul Ehsan • Bersebelahan Hutan Rekreasi Air Terjun Sg. Tekala</p>
+                            <p class="text-gray-500 text-xs mt-1">Koordinat: 3°03'14.0"N 101°52'22.0"E</p>
+                        </div>
+                    </div>
+
+                    <!-- Registration Info -->
+                    <div class="info-grid mb-5 reveal stagger-3">
+                        <span class="label">📋 Pendaftaran JAIS</span>
+                        <span class="value">13S(3)38/202</span>
+                        <span class="label">📜 Kod JAKIM</span>
+                        <span class="value">BZH 4031</span>
+                        <span class="label">🏛️ Naungan</span>
+                        <span class="value">Yayasan Peradaban Jawi Nusantara (YPJN)</span>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-gray-400 leading-relaxed mb-4 reveal stagger-4">
+                        <strong class="text-white">Tahfiz Integrasi &amp; Vokasional</strong> adalah aliran yang menjadi dasar kepada pendidikan di INSTAQLIM. Tidak menjadikan HAFALAN sebagai matlamat, sebaliknya sebagai <strong class="text-amber-400">ALAT (Tools)</strong> untuk mencapai <strong class="text-amber-400">FAHAM ALLAH secara KAFFAH</strong> (Al-Baqarah: 208).
                     </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3 reveal stagger-3">
-                            <div class="w-6 h-6 rounded-full bg-emerald-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-300">Program hafazan 30 juzuk dalam 3-5 tahun</span>
-                        </li>
-                        <li class="flex items-start gap-3 reveal stagger-4">
-                            <div class="w-6 h-6 rounded-full bg-emerald-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-300">Kurikulum Moderasi JAIS yang diiktiraf</span>
-                        </li>
-                        <li class="flex items-start gap-3 reveal stagger-5">
-                            <div class="w-6 h-6 rounded-full bg-emerald-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-300">Asrama penuh untuk pelajar lelaki</span>
-                        </li>
-                    </ul>
+
+                    <p class="text-gray-400 leading-relaxed mb-5 reveal stagger-5">
+                        <span class="text-amber-400 font-medium">"Hafazan bukan skill set, tetapi adalah tanggungjawab berterusan"</span> — hingga mampu membawa prinsip Khalifah yang memberi tauladan dengan Amali Al-Quran (Al-Baqarah: 185) sebagai <span class="text-amber-400">PETUNJUK, PENJELASAN &amp; PEMBEZA HAQ &amp; BATIL</span>.
+                    </p>
+
+                    <!-- Vision & Mission -->
+                    <div class="grid sm:grid-cols-2 gap-4 reveal stagger-6">
+                        <div class="bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
+                            <h4 class="text-amber-400 font-bold text-sm mb-1">🎯 VISI</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">Menjadi Pusat Pendidikan lestari yang menjadikan <strong class="text-amber-400">Tadabbur Amali</strong> sebagai dasar.</p>
+                        </div>
+                        <div class="bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
+                            <h4 class="text-amber-400 font-bold text-sm mb-1">🌟 MISI</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed">Melahirkan generasi Huffaz berakhlak Al-Quran yang berwawasan dan mampu memimpin masyarakat lokal dan global.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="relative reveal stagger-3">
-                    <div class="aspect-square relative">
-                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-2xl rotate-3"></div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-900/50 to-emerald-900 rounded-2xl overflow-hidden flex items-center justify-center border border-[#2a3d32]">
-                            <img src="https://arleta.site/interactivelink/2950/Berita-IBRAH.png" alt="Logo" class="w-3/4 h-3/4 object-contain rounded-xl" />
-                            <div class="corner corner-tl"></div>
-                            <div class="corner corner-tr"></div>
-                            <div class="corner corner-bl"></div>
-                            <div class="corner corner-br"></div>
+
+                <div>
+                    <!-- Image with info overlay -->
+                    <div class="relative reveal stagger-3">
+                        <div class="aspect-[4/3] relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-2xl rotate-2"></div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-amber-900/30 to-emerald-900 rounded-2xl overflow-hidden flex items-center justify-center border border-[#2a3d32]">
+                                <img src="https://arleta.site/interactivelink/2950/Berita-IBRAH.png" alt="Logo INSTAQLIM" class="w-3/4 h-3/4 object-contain rounded-xl" />
+                                <div class="corner corner-tl"></div>
+                                <div class="corner corner-tr"></div>
+                                <div class="corner corner-bl"></div>
+                                <div class="corner corner-br"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Info Cards -->
+                        <div class="grid grid-cols-2 gap-3 mt-5">
+                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center">
+                                <div class="text-amber-400 text-2xl font-bold font-serif">1448H</div>
+                                <p class="text-gray-400 text-xs">Tahun Pengambilan</p>
+                            </div>
+                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center">
+                                <div class="text-amber-400 text-2xl font-bold">PBMS</div>
+                                <p class="text-gray-400 text-xs">Disejiakan oleh</p>
+                            </div>
+                            <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center col-span-2">
+                                <div class="text-amber-400 text-lg font-semibold">📞 013-2079 409</div>
+                                <p class="text-gray-400 text-xs">www.instaqlim.com.my</p>
+                            </div>
+                        </div>
+
+                        <!-- Sejarah ringkas -->
+                        <div class="mt-5 bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
+                            <h4 class="text-amber-400 font-bold text-sm mb-2">📜 Sejarah Ringkas</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Diasaskan oleh <strong class="text-white">Allahyarham Mohamed Bin Abbas</strong> melalui gerakan <strong class="text-amber-400">Persatuan Belia Masjid Selangor (PBMS)</strong> dengan sokongan JAIS. 
+                                Cetusan awal didorong oleh Pengarah JAIS sewaktu lawatan pada 2010. 
+                                Kini INSTAQLIM berada di bawah naungan <strong class="text-amber-400">Yayasan Peradaban Jawi Nusantara (YPJN)</strong> sejak 2021.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -959,7 +1056,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m8-10a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Kurikulum Bersepadu</h3>
+                    <h3 class="text-xl font-bold text-white mb-3">Kurikulum Integrasi &amp; Vokasional</h3>
                     <p class="text-gray-400 leading-relaxed">Gabungan kurikulum tahfiz, akademik kebangsaan dan TVET yang diiktiraf oleh JAIS serta selari dengan Dasar Tahfiz Negara.</p>
                 </div>
 
@@ -969,8 +1066,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Asrama Penuh</h3>
-                    <p class="text-gray-400 leading-relaxed">Persekitaran pembelajaran yang kondusif dengan asrama penuh untuk pelajar lelaki, menggalakkan pembentukan sahsiah dan disiplin.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Asrama Penuh &amp; Alam Semula Jadi</h3>
+                    <p class="text-gray-400 leading-relaxed">Persekitaran pembelajaran yang kondusif berhampiran hutan rekreasi Air Terjun Sg. Tekala, menggalakkan pembentukan sahsiah dan disiplin.</p>
                 </div>
             </div>
         </div>
@@ -986,6 +1083,7 @@
                 <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 reveal stagger-1">
                     Tarikh <span class="text-amber-400">Penting</span>
                 </h2>
+                <p class="text-gray-400 mt-3 reveal stagger-2">Pengambilan Sesi 1448H / 2026</p>
             </div>
 
             <div class="glass-card p-8 md:p-12 relative">
@@ -1009,19 +1107,19 @@
                     </div>
                     <div class="timeline-item reveal stagger-3">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">25 September 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">10-20 Nov 2026</span>
                             <span class="text-gray-300">Temuduga</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-4">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">5 Disember 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">5 Dis 2026</span>
                             <span class="text-gray-300">Pengumuman Keputusan</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-5">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">21 Jan 2027</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">20 Dis 2026</span>
                             <span class="text-gray-300">Hari Pendaftaran &amp; Orientasi</span>
                         </div>
                     </div>
@@ -1170,10 +1268,9 @@
                         </div>
                         <h4 class="font-bold text-white mb-2">Alamat</h4>
                         <p class="text-gray-400 text-sm">
-                            Maahad Tahfiz al-Quran lil Muttaqin<br />
-                            Kompleks Sumur Bakti<br />
-                            Jln Sg. Lalang, Sg. Tekala<br />
-                            43500 Semenyih, Selangor
+                            Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM)<br />
+                            Mukim Ulu Semenyih, Daerah Hulu Langat<br />
+                            Selangor Darul Ehsan
                         </p>
                     </div>
                     <div class="text-center reveal stagger-2">
@@ -1184,8 +1281,8 @@
                         </div>
                         <h4 class="font-bold text-white mb-2">Telefon</h4>
                         <p class="text-gray-400 text-sm">
-                            +613-2079 409<br />
-                            +6017 272-6465
+                            +6013-2079 409<br />
+                            +6013-6724 313
                         </p>
                     </div>
                     <div class="text-center reveal stagger-3">
@@ -1194,8 +1291,11 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </div>
-                        <h4 class="font-bold text-white mb-2">Email</h4>
-                        <p class="text-gray-400 text-sm">mtaq.lilmuttaqin@gmail.com</p>
+                        <h4 class="font-bold text-white mb-2">Email &amp; Web</h4>
+                        <p class="text-gray-400 text-sm">
+                            mtaq.lilmuttaqin@gmail.com<br />
+                            <a href="https://www.instaqlim.com.my" target="_blank" class="text-amber-400 hover:underline">www.instaqlim.com.my</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1207,7 +1307,8 @@
     ============================================================ -->
     <footer class="py-8 px-4 border-t border-[#2a3d32] z-10 relative">
         <div class="max-w-6xl mx-auto text-center">
-            <p class="text-gray-500 text-sm">© 2025 Maahad Tahfiz al-Quran lil Muttaqin. Hak Cipta Terpelihara.</p>
+            <p class="text-gray-500 text-sm">© 2026 Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM). Hak Cipta Terpelihara.</p>
+            <p class="text-gray-600 text-xs mt-1">Disediakan oleh Persatuan Belia Masjid Selangor • Yayasan Peradaban Jawi Nusantara</p>
         </div>
     </footer>
 
@@ -1231,11 +1332,11 @@
             <button class="btn-close-modal" onclick="closeForm()" aria-label="Tutup borang">✕</button>
 
             <h2 class="font-serif text-2xl sm:text-3xl font-bold text-amber-400 mb-2 text-center">📝 Borang Pendaftaran</h2>
-            <p class="text-gray-400 text-center text-sm mb-6">Sila isi maklumat dengan lengkap dan tepat.</p>
+            <p class="text-gray-400 text-center text-sm mb-6">Sesi 1448H / 2026 • Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM)</p>
 
             <form id="registrationForm" action="https://formsubmit.co/pendaftar.instaqlim@gmail.com" method="POST">
                 <!-- FormSubmit Config -->
-                <input type="hidden" name="_subject" value="Pendaftaran Pelajar Baru - Mei 2026" />
+                <input type="hidden" name="_subject" value="Pendaftaran Pelajar Baru - INSTAQLIM 1448H" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value="" />
@@ -1389,7 +1490,7 @@
                     <label class="custom-checkbox">
                         <input type="checkbox" name="pengakuan" required />
                         <span class="check-mark"></span>
-                        <span class="check-label">Saya mengakui bahawa semua maklumat yang diberikan adalah benar dan saya bersetuju dengan syarat dan ketentuan pendaftaran Maahad Tahfiz al-Quran lil Muttaqin.</span>
+                        <span class="check-label">Saya mengakui bahawa semua maklumat yang diberikan adalah benar dan saya bersetuju dengan syarat dan ketentuan pendaftaran Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM).</span>
                     </label>
                 </div>
 
@@ -1578,7 +1679,6 @@
         function openForm() {
             formOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            // Reset form if success was shown
             if (successMessage.classList.contains('show')) {
                 successMessage.classList.remove('show');
                 registrationForm.style.display = 'block';
@@ -1596,7 +1696,6 @@
             }
         }
 
-        // Close form with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && formOverlay.classList.contains('active')) {
                 closeForm();
@@ -1608,7 +1707,6 @@
         // ============================================================
         if (registrationForm) {
             registrationForm.addEventListener('submit', function(e) {
-                // Show success message after form submits
                 setTimeout(() => {
                     registrationForm.style.display = 'none';
                     successMessage.classList.add('show');
@@ -1632,7 +1730,6 @@
             });
         });
 
-        // IC Number formatting
         const icInput = document.querySelector('input[name="no_kp"]');
         if (icInput) {
             icInput.addEventListener('input', function() {
@@ -1640,17 +1737,15 @@
             });
         }
 
-        // Phone formatting
         document.querySelectorAll('input[type="tel"]').forEach(input => {
             input.addEventListener('input', function() {
                 this.value = this.value.replace(/\D/g, '');
             });
         });
 
-        console.log('🚀 Maahad Tahfiz al-Quran lil Muttaqin — Landing Page Loaded');
-        console.log('📌 Fitur: Hero Bold | Counter | Features | Products | Modal Form | WhatsApp Float');
+        console.log('🚀 INSTAQLIM — Maahad Tahfiz al-Quran lil Muttaqin');
+        console.log('📌 Sesi 1448H / 2026 | Pendaftaran Pelajar Baru');
         console.log('📝 Klik butang "Daftar" untuk membuka borang pendaftaran.');
     </script>
-
 </body>
 </html>
