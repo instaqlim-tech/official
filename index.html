@@ -667,6 +667,112 @@
         }
 
         /* ============================================================
+           GALLERY
+           ============================================================ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.15);
+            z-index: 5;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 16px 16px;
+            background: linear-gradient(to top, rgba(10, 15, 13, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        .gallery-item .overlay p {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--fg);
+        }
+        .gallery-item .overlay span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 15, 13, 0.95);
+            backdrop-filter: blur(16px);
+            z-index: 300;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            animation: overlayFadeIn 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            object-fit: contain;
+        }
+        .lightbox .close-lightbox {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            background: none;
+            border: none;
+            color: var(--fg);
+            font-size: 36px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .lightbox .close-lightbox:hover {
+            color: var(--accent);
+        }
+        .lightbox .caption {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--fg);
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            max-width: 80%;
+        }
+
+        /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 640px) {
@@ -688,6 +794,14 @@
                 padding: 20px 16px;
                 max-height: 95vh;
             }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+            .lightbox img {
+                max-width: 95vw;
+                max-height: 70vh;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -707,6 +821,12 @@
             }
             .form-overlay {
                 animation: none;
+            }
+            .gallery-item:hover {
+                transform: none;
+            }
+            .gallery-item:hover img {
+                transform: none;
             }
         }
 
@@ -801,6 +921,7 @@
                     <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Tentang</a>
                     <a href="#features" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Keistimewaan</a>
                     <a href="#dates" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Tarikh</a>
+                    <a href="#gallery" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Galeri</a>
                     <a href="#products" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Produk</a>
                     <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors">Hubungi</a>
                     <button onclick="openForm()" class="px-6 py-2.5 bg-gradient-to-r from-[#c9a227] to-[#b8912a] text-[#0a0f0d] font-bold rounded-lg text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-amber-900/30">
@@ -825,6 +946,7 @@
             <a href="#about" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Tentang</a>
             <a href="#features" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Keistimewaan</a>
             <a href="#dates" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Tarikh</a>
+            <a href="#gallery" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Galeri</a>
             <a href="#products" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Produk</a>
             <a href="#contact" class="mobile-link text-xl font-medium text-gray-300 hover:text-amber-400 transition-colors">Hubungi</a>
             <button onclick="openForm()" class="mt-4 px-8 py-3 bg-gradient-to-r from-[#c9a227] to-[#b8912a] text-[#0a0f0d] font-bold rounded-lg text-lg transition-all hover:scale-105">
@@ -926,7 +1048,7 @@
     </section>
 
     <!-- ============================================================
-    ABOUT SECTION (DIKEMASKINI DENGAN INFO DARI PDF)
+    ABOUT SECTION
     ============================================================ -->
     <section id="about" class="py-20 px-4 z-10 relative">
         <div class="max-w-6xl mx-auto">
@@ -983,7 +1105,6 @@
                 </div>
 
                 <div>
-                    <!-- Image with info overlay -->
                     <div class="relative reveal stagger-3">
                         <div class="aspect-[4/3] relative">
                             <div class="absolute inset-0 bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-2xl rotate-2"></div>
@@ -996,7 +1117,6 @@
                             </div>
                         </div>
 
-                        <!-- Quick Info Cards -->
                         <div class="grid grid-cols-2 gap-3 mt-5">
                             <div class="bg-[#151f1a] border border-[#2a3d32] rounded-xl p-4 text-center">
                                 <div class="text-amber-400 text-2xl font-bold font-serif">1448H</div>
@@ -1012,7 +1132,6 @@
                             </div>
                         </div>
 
-                        <!-- Sejarah ringkas -->
                         <div class="mt-5 bg-[#0a0f0d] border border-[#2a3d32] rounded-xl p-4">
                             <h4 class="text-amber-400 font-bold text-sm mb-2">📜 Sejarah Ringkas</h4>
                             <p class="text-gray-400 text-sm leading-relaxed">
@@ -1028,7 +1147,7 @@
     </section>
 
     <!-- ============================================================
-    FEATURES SECTION (Kenapa Pilih Kami)
+    FEATURES SECTION
     ============================================================ -->
     <section id="features" class="py-20 px-4 z-10 relative">
         <div class="max-w-6xl mx-auto">
@@ -1074,7 +1193,7 @@
     </section>
 
     <!-- ============================================================
-    IMPORTANT DATES SECTION
+    IMPORTANT DATES SECTION (DIKEMASKINI)
     ============================================================ -->
     <section id="dates" class="py-20 px-4 z-10 relative">
         <div class="max-w-4xl mx-auto">
@@ -1095,31 +1214,31 @@
                 <div class="space-y-6 relative">
                     <div class="timeline-item reveal stagger-1">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">1 Jun 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">1 Jun 2026</span>
                             <span class="text-gray-300">Pembukaan Pendaftaran Online</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-2">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">31 Ogos 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">25 Okt 2026</span>
                             <span class="text-gray-300">Tutup Pendaftaran</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-3">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">10-20 Nov 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">5 - 15 Dis 2026</span>
                             <span class="text-gray-300">Temuduga</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-4">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">5 Dis 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">20 Dis 2026</span>
                             <span class="text-gray-300">Pengumuman Keputusan</span>
                         </div>
                     </div>
                     <div class="timeline-item reveal stagger-5">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                            <span class="text-amber-400 font-bold text-lg sm:w-44 flex-shrink-0">20 Dis 2026</span>
+                            <span class="text-amber-400 font-bold text-lg sm:w-48 flex-shrink-0">21 Jan 2027</span>
                             <span class="text-gray-300">Hari Pendaftaran &amp; Orientasi</span>
                         </div>
                     </div>
@@ -1129,7 +1248,35 @@
     </section>
 
     <!-- ============================================================
-    PRODUCTS SECTION (Pages Baru)
+    GALLERY SECTION (BARU)
+    ============================================================ -->
+    <section id="gallery" class="py-20 px-4 z-10 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase reveal">Galeri</p>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 reveal stagger-1">
+                    Aktiviti <span class="text-amber-400">INSTAQLIM</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto mt-4 reveal stagger-2">
+                    Gambar-gambar aktiviti dan program sepanjang tahun di Maahad Tahfiz al-Quran lil Muttaqin.
+                </p>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be rendered by JavaScript -->
+            </div>
+
+            <!-- Admin note for updating gallery -->
+            <div class="mt-8 text-center reveal stagger-6">
+                <p class="text-gray-500 text-sm border border-[#2a3d32] rounded-lg p-4 inline-block bg-[#151f1a]/50">
+                    <span class="text-amber-400">📸</span> Untuk mengemaskini galeri, ubah suai array <code class="text-amber-400">galleryImages</code> dalam JavaScript.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PRODUCTS SECTION
     ============================================================ -->
     <section id="products" class="py-20 px-4 z-10 relative">
         <div class="max-w-6xl mx-auto">
@@ -1144,7 +1291,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Product 1: Jualan Amal -->
                 <a href="https://ncms.yzza.io/jualan_amal_instaqlim" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-1 group">
                     <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1161,7 +1307,6 @@
                     </div>
                 </a>
 
-                <!-- Product 2: Zakat -->
                 <a href="https://stiqdat.interactivelink.site/zakat" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-2 group">
                     <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1178,7 +1323,6 @@
                     </div>
                 </a>
 
-                <!-- Product 3: Ibadah Qurban -->
                 <a href="https://stiqdat.interactivelink.site" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-3 group">
                     <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1195,7 +1339,6 @@
                     </div>
                 </a>
 
-                <!-- Product 4: Kod Jawi -->
                 <a href="https://stiqdat.interactivelink.site/KODJAWI-BUNYI" target="_blank" rel="noopener noreferrer" class="product-card reveal stagger-4 group">
                     <div class="w-14 h-14 rounded-xl bg-emerald-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1213,7 +1356,6 @@
                 </a>
             </div>
 
-            <!-- CTA Button to Open Form -->
             <div class="text-center mt-12 reveal stagger-5">
                 <button onclick="openForm()" class="btn-primary text-lg px-12 py-4">
                     <span>📝 Daftar Pelajar Baru</span>
@@ -1223,7 +1365,7 @@
     </section>
 
     <!-- ============================================================
-    CTA SECTION (Full width, bold accent)
+    CTA SECTION
     ============================================================ -->
     <section id="cta" class="z-10 relative">
         <div class="w-full bg-gradient-to-r from-[#c9a227] to-[#b8912a] py-20 px-4">
@@ -1325,7 +1467,16 @@
     </a>
 
     <!-- ============================================================
-    FORM OVERLAY / MODAL (Borang Pendaftaran)
+    LIGHTBOX
+    ============================================================ -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="close-lightbox" onclick="closeLightbox()">✕</button>
+        <img id="lightboxImage" src="" alt="Gambar Aktiviti" />
+        <p class="caption" id="lightboxCaption"></p>
+    </div>
+
+    <!-- ============================================================
+    FORM OVERLAY / MODAL
     ============================================================ -->
     <div class="form-overlay" id="formOverlay" onclick="closeFormOutside(event)">
         <div class="form-modal">
@@ -1335,13 +1486,11 @@
             <p class="text-gray-400 text-center text-sm mb-6">Sesi 1448H / 2026 • Maahad Tahfiz al-Quran lil Muttaqin (INSTAQLIM)</p>
 
             <form id="registrationForm" action="https://formsubmit.co/pendaftar.instaqlim@gmail.com" method="POST">
-                <!-- FormSubmit Config -->
                 <input type="hidden" name="_subject" value="Pendaftaran Pelajar Baru - INSTAQLIM 1448H" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value="" />
 
-                <!-- Maklumat Pelajar -->
                 <div class="mb-6">
                     <h3 class="form-section-title">👤 Maklumat Pelajar</h3>
                     <div class="grid md:grid-cols-2 gap-4">
@@ -1386,7 +1535,6 @@
                     </div>
                 </div>
 
-                <!-- Maklumat Hafazan -->
                 <div class="mb-6">
                     <h3 class="form-section-title">📖 Maklumat Hafazan</h3>
                     <div class="grid md:grid-cols-2 gap-4">
@@ -1419,7 +1567,6 @@
                     </div>
                 </div>
 
-                <!-- Maklumat Ibu Bapa / Penjaga -->
                 <div class="mb-6">
                     <h3 class="form-section-title">👨‍👩‍👦 Maklumat Ibu Bapa / Penjaga</h3>
                     <div class="grid md:grid-cols-2 gap-4">
@@ -1466,7 +1613,6 @@
                     </div>
                 </div>
 
-                <!-- Maklumat Kesihatan -->
                 <div class="mb-6">
                     <h3 class="form-section-title">🏥 Maklumat Kesihatan</h3>
                     <div class="grid md:grid-cols-2 gap-4">
@@ -1485,7 +1631,6 @@
                     </div>
                 </div>
 
-                <!-- Pengakuan -->
                 <div class="mb-6">
                     <label class="custom-checkbox">
                         <input type="checkbox" name="pengakuan" required />
@@ -1494,7 +1639,6 @@
                     </label>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="text-center">
                     <button type="submit" class="btn-primary w-full sm:w-auto px-10 py-3.5 text-base">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1505,7 +1649,6 @@
                 </div>
             </form>
 
-            <!-- Success Message -->
             <div class="success-message" id="successMessage">
                 <div class="success-icon">
                     <svg class="w-10 h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1524,11 +1667,111 @@
     ============================================================ -->
     <script>
         // ============================================================
+        // GALLERY DATA - Kemaskini array ini untuk tambah/tukar gambar
+        // ============================================================
+        const galleryImages = [{
+            src: 'https://arleta.site/interactivelink/2950/Berita-IBRAH.png',
+            caption: 'Logo & Identiti INSTAQLIM'
+        }, {
+            src: 'https://arleta.site/interactivelink/2950/Logo-5-Big.jpg',
+            caption: 'Logo Rasmi Maahad Tahfiz al-Quran lil Muttaqin'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Program+Hafazan',
+            caption: 'Sesi Hafazan & Tadabbur Al-Quran'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Kelas+Integrasi',
+            caption: 'Kelas Integrasi & Vokasional'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Aktiviti+Luaran',
+            caption: 'Aktiviti Luaran & Sukan'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=TVET+Fertigasi',
+            caption: 'Latihan TVET - Fertigasi & Akuakultur'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Program+Kebajikan',
+            caption: 'Program Kebajikan & Masyarakat'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Asrama+INSTAQLIM',
+            caption: 'Suasana Asrama & Persekitaran'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Kuliah+Subuh',
+            caption: 'Kuliah Subuh & Tazkirah Harian'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Lawatan+Kehormat',
+            caption: 'Lawatan Kehormat dari JAIS & PBMS'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Konvokesyen',
+            caption: 'Majlis Konvokesyen & Graduasi Huffaz'
+        }, {
+            src: 'https://placehold.co/600x400/1a4d3a/c9a227?text=Program+Qurban',
+            caption: 'Program Ibadah Qurban & Korban'
+        }];
+
+        // ============================================================
+        // RENDER GALLERY
+        // ============================================================
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+
+            grid.innerHTML = galleryImages.map((img, index) => `
+                    <div class="gallery-item reveal stagger-${(index % 6) + 1}" onclick="openLightbox(${index})">
+                        <img src="${img.src}" alt="${img.caption}" loading="lazy" />
+                        <div class="overlay">
+                            <p>${img.caption}</p>
+                            <span>Klik untuk lihat</span>
+                        </div>
+                    </div>
+                `).join('');
+
+            // Re-trigger reveal animations for gallery items
+            setTimeout(() => {
+                document.querySelectorAll('#galleryGrid .gallery-item').forEach((el, i) => {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, i * 100);
+                });
+            }, 300);
+        }
+
+        // ============================================================
+        // LIGHTBOX
+        // ============================================================
+        function openLightbox(index) {
+            const img = galleryImages[index];
+            if (!img) return;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            const caption = document.getElementById('lightboxCaption');
+
+            lightboxImg.src = img.src;
+            caption.textContent = img.caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e && e.target !== e.currentTarget) return;
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                if (document.getElementById('formOverlay').classList.contains('active')) {
+                    closeForm();
+                }
+            }
+        });
+
+        // ============================================================
         // NAVBAR SCROLL & ACTIVE LINK
         // ============================================================
         const navbar = document.getElementById('navbar');
         const scrollProgress = document.getElementById('scrollProgress');
-        const sections = ['home', 'about', 'features', 'dates', 'products', 'contact'];
+        const sections = ['home', 'about', 'features', 'dates', 'gallery', 'products', 'contact'];
         const navLinks = document.querySelectorAll('.nav-link');
 
         function updateNavbar() {
@@ -1607,7 +1850,7 @@
         });
 
         // ============================================================
-        // REVEAL ON SCROLL (Intersection Observer)
+        // REVEAL ON SCROLL
         // ============================================================
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1670,7 +1913,7 @@
         if (statsSection) statsObserver.observe(statsSection);
 
         // ============================================================
-        // FORM OVERLAY / MODAL
+        // FORM OVERLAY
         // ============================================================
         const formOverlay = document.getElementById('formOverlay');
         const registrationForm = document.getElementById('registrationForm');
@@ -1696,12 +1939,6 @@
             }
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && formOverlay.classList.contains('active')) {
-                closeForm();
-            }
-        });
-
         // ============================================================
         // FORM HANDLING
         // ============================================================
@@ -1715,7 +1952,7 @@
         }
 
         // ============================================================
-        // INPUT VALIDATION STYLING
+        // INPUT VALIDATION
         // ============================================================
         document.querySelectorAll('.form-input').forEach(input => {
             input.addEventListener('blur', function() {
@@ -1743,9 +1980,16 @@
             });
         });
 
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderGallery();
+
         console.log('🚀 INSTAQLIM — Maahad Tahfiz al-Quran lil Muttaqin');
         console.log('📌 Sesi 1448H / 2026 | Pendaftaran Pelajar Baru');
+        console.log('📸 Galeri: ' + galleryImages.length + ' gambar dimuatkan');
         console.log('📝 Klik butang "Daftar" untuk membuka borang pendaftaran.');
+        console.log('🔄 Untuk kemaskini galeri, ubah array "galleryImages" dalam JavaScript.');
     </script>
 </body>
 </html>
